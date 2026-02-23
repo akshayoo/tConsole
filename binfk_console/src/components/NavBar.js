@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from "next/image"
 import styles from "./NavBar.module.css"
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 
 
 export function NavBar() {
@@ -15,8 +15,7 @@ export function NavBar() {
 
         async function WhoAmi(){
 
-            const response = await axios.get("http://localhost:6050/auth/whoami",
-                {withCredentials : true}
+            const response = await axiosApi.get("/auth/whoami",
             )
 
             const data = response.data
@@ -109,8 +108,7 @@ function UserProfile({whoami}) {
 
         try{
 
-            const response = await axios.post("http://localhost:6050/auth/logout",{},
-                {withCredentials : true}
+            const response = await axiosApi.post("/auth/logout"
             )
 
             const data = response.data

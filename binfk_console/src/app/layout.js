@@ -2,7 +2,7 @@
 import "./globals.css"
 
 export const metadata = {
-  title: "tCONSOLE",          
+  title: "tconsole",          
   description: "Your app description here",
   icons: {
     icon: "/favicon.ico",      
