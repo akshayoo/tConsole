@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from routers import auth, initialization, intake, samsubmission, items, projectsinfo, projectforms, projectsrepos, llinter
 
-app = FastAPI(title= "theraConsole", version= "V.0.0.1")
+app = FastAPI(title= "tConsole", version= "V.0.0.1")
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,7 +25,7 @@ app.include_router(llinter.router)
 
 @app.get("/")
 def root():
-    return{"status" : "The app is running"}
+    return{"status" : "tConsole is live"}
 
 #if __name__ == "__main__":
  #   uvicorn.run( port= 6050, reload=True)

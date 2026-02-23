@@ -31,8 +31,6 @@ async def interaction(usertok : dict = Depends(parse_token)):
                                                  {
                                                      "_id" : 1
                                                  })
-        print("userid from token:", userid)
-        print("user found:", user)  # If
 
         conversations = (convo_collection.find({"user_id": user["_id"],   "deleted": False }).sort("updated_at", -1))
         
