@@ -1,6 +1,6 @@
 import styles from '../LabForm.module.css'
 import { useState } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
 
@@ -70,8 +70,8 @@ export function NcounterForm({projectId}) {
             const uploadData = new FormData()
             uploadData.append("file" , file)
 
-            const response = await axios.post("http://127.0.0.1:6050/intake/tablepopulate",
-                uploadData, {withCredentials : true}
+            const response = await axiosApi.post("/intake/tablepopulate",
+                uploadData
             )
             const data = response.data  
 
@@ -108,9 +108,7 @@ export function NcounterForm({projectId}) {
         setButtonDis(true)
 
         try{
-            const response = await axios.post("http://127.0.0.1:6050/intake/ncounterform", payload, 
-                {withCredentials : true}
-            )
+            const response = await axiosApi.post("/intake/ncounterform", payload)
 
             const data = response.data
 

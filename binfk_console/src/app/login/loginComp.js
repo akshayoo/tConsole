@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'; 
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import styles from './loginComp.module.css'
 import Image from "next/image"
 import Link from 'next/link';
@@ -27,10 +27,9 @@ async function signIn(e) {
             return
         }
         try {
-            const response = await axios.post(
-                "http://localhost:6050/auth/login",
-                formData,
-                { withCredentials: true }
+            const response = await axiosApi.post(
+                "/auth/login",
+                formData
             )
 
             console.log(response.data)

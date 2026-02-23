@@ -1,5 +1,5 @@
 import styles from '../ViewComp.module.css'
-import axios from 'axios'
+import axiosApi from '@/lib/api'
 import { toastSet } from '@/components/toastfunc'
 import { MessageComp } from '@/components/messageComp'
 import { useState } from 'react'
@@ -31,9 +31,8 @@ export function EmailReports({projectId, sec, flow, EmailTemp}) {
         setButtonDis(true)
         
         try{
-            const response = await axios.post('http://localhost:6050/reports/sendemail',
-                formData,
-                {withCredentials : true}
+            const response = await axiosApi.post('/reports/sendemail',
+                formData
             )
 
             const data = response.data

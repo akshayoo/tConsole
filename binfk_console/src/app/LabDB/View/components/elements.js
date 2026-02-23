@@ -1,5 +1,5 @@
 import styles from '../ViewComp.module.css'
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import { useState } from 'react';
 import { EmailReports } from './elementsent';
 import { MessageComp } from '@/components/messageComp';
@@ -19,9 +19,9 @@ export function SampleSubDetailsComp({samsubDetails, setSamsubDetails, projectId
         }
 
         try{
-            const response = await axios.post("http://localhost:6050/reports/samplesubreportpdf",
+            const response = await axiosApi.post("/reports/samplesubreportpdf",
                 {"project_id" : projectId},
-                {responseType : "blob", withCredentials : true}
+                {responseType : "blob"}
             )
 
 
@@ -171,9 +171,9 @@ export function QcSamDetailsComp({qcDetails, projectId, setQcDetails}) {
         }
 
         try{
-            const response = await axios.post("http://localhost:6050/reports/genqcreportpdf",
+            const response = await axiosApi.post("/reports/genqcreportpdf",
                 {"project_id" : projectId},
-                {responseType : "blob", withCredentials : true}
+                {responseType : "blob"}
             )
 
             const blob = new Blob([response.data], {type: "application/pdf"})
@@ -306,9 +306,9 @@ export function LibSamDetailsComp({libqcDetails, projectId, setLibqcDetails}) {
         }
 
         try{
-            const response = await axios.post("http://localhost:6050/reports/genlibqcreportpdf",
+            const response = await axiosApi.post("/reports/genlibqcreportpdf",
                 {"project_id" : projectId},
-                {responseType : "blob", withCredentials : true}
+                {responseType : "blob"}
             )
 
             const blob = new Blob([response.data], {type: "application/pdf"})

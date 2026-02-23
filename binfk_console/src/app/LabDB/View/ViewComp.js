@@ -2,7 +2,7 @@
 
 import styles from './ViewComp.module.css'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import { SampleSubDetailsComp, QcSamDetailsComp, LibSamDetailsComp, BiinfoDetailsComp } from './components/elements';
 import { QcReportPushForm, LibQcReportPushForm, BinfReportPushForm } from './components/elemoptions';
 import { EmailReports } from './components/elementsent';
@@ -54,8 +54,7 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
     useEffect(() => {
         async function ProjectsPipeline() {
             try{
-                const response = await axios.get("http://localhost:6050/project/projects",
-                    {withCredentials : true}
+                const response = await axiosApi.get("http://localhost:6050/project/projects"
                 )
                 const data = await response.data
 
@@ -79,11 +78,11 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
 
         try{
 
-            const response = await axios.post("http://localhost:6050/project/projectcomp",
+            const response = await axiosApi.post("/project/projectcomp",
                 {
                     "project_id" : projectId,
                     "project_status" : projectStatus 
-                }, {withCredentials : true}
+                }
             )   
             const data = response.data
 
@@ -246,12 +245,12 @@ function StatusPop({projectCont}){
 
         try {
 
-            const response = await axios.post("http://localhost:6050/project/taskstatusupdate",
+            const response = await axiosApi.post("/project/taskstatusupdate",
                 {
                     "project_id" : projectId,
                     "task" : task,
                     "sec" : sec
-                }, {withCredentials : true}
+                }
             )
 
             const data = response.data
@@ -343,8 +342,8 @@ function SampleSubDetails({projectCont, samsubDetails, setSamsubDetails}){
 
         try {
 
-            const response = await axios.post("http://localhost:6050/project/samsubdetails",
-                {"project_id" : projectId}, {withCredentials : true}
+            const response = await axiosApi.post("/project/samsubdetails",
+                {"project_id" : projectId}
             )
 
             const data = response.data
@@ -407,8 +406,8 @@ function QcSamDetails({projectCont, qcDetails, setQcDetails}) {
         
         try{
 
-            const response = await axios.post("http://localhost:6050/project/qcsubdetails",
-                {"project_id" : projectId}, {withCredentials : true}
+            const response = await axiosApi.post("/project/qcsubdetails",
+                {"project_id" : projectId}
             )
 
             const data = response.data
@@ -464,8 +463,8 @@ function LibSamDetails({projectCont, libqcDetails, setLibqcDetails}) {
 
         try{
 
-            const response = await axios.post("http://localhost:6050/project/libqcsubdetails",
-                {"project_id" : projectId}, {withCredentials :true}
+            const response = await axiosApi.post("/project/libqcsubdetails",
+                {"project_id" : projectId}
             )
 
             const data = response.data
@@ -519,9 +518,8 @@ function BiInfoDetails({projectCont, binfDetails, setBinfDetails}) {
 
     async function BinfSub(projectId) {
         try{
-            const response = await axios.post("http://localhost:6050/project/binfsubdetails",
-                {"project_id" : projectId},
-                {withCredentials : true}
+            const response = await axiosApi.post("/project/binfsubdetails",
+                {"project_id" : projectId}
             )
 
             const data = response.data
@@ -571,9 +569,9 @@ function Reports({projectCont}) {
     async function downlFinalRep(projectId) {
         try{
 
-            const response = await axios.post("http://localhost:6050/reports/genfinreportpdf",
+            const response = await axiosApi.post("/reports/genfinreportpdf",
                 {"project_id" : projectId},
-                {responseType : "blob", withCredentials : true}
+                {responseType : "blob"}
             )
 
             const blob = new Blob([response.data], {type : "application/pdf"})
@@ -597,9 +595,8 @@ function Reports({projectCont}) {
     async function closeProject(projectId){
         try{
     
-            const response = await axios.post("http://localhost:6050/project/closeproject",
-                {"project_id" : projectId},
-                {withCredentials : true}
+            const response = await axios.post("/project/closeproject",
+                {"project_id" : projectId}
             )
 
             const data = response.data

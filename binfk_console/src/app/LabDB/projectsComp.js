@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import styles from './LabDB.module.css'
 import Link from 'next/link';
 
@@ -14,8 +14,7 @@ export function ProjectsComp(){
         async function qetProjects() {
 
             try{
-                const response = await axios.get("http://localhost:6050/project/projectdash", 
-                    {withCredentials : true}
+                const response = await axiosApi.get("/project/projectdash", 
                 )
                 const data = response.data
                 setDashboard(data.payload)

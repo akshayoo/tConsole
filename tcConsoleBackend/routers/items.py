@@ -77,12 +77,6 @@ async def insert_std(payload : CustomServics, usertok : dict = Depends(parse_tok
         }
     
     category = payload.category.strip()
-    
-    if category != "Custom services" and usertok["role"] != "admin":
-        return {
-            "status": False,
-            "message": "New service lines can only be added to Custom services. Contact admin to add to other categories."
-        }
 
     collection = collections_load("tcStdDeliverables")
 

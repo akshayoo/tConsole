@@ -8,9 +8,9 @@ import os
 
 
 embedding_model = "/home/akshay/Projects/models/Emb/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
-doc_index = "./doc_index.faiss"
-doc_split = "./doc_split_text.pkl"
-emb_model = SentenceTransformer(embedding_model, local_files_only=True)
+doc_index = "./utils/doc_index.faiss"
+doc_split = "./utils/doc_split_text.pkl"
+emb_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 def get_context(query):
 
@@ -92,13 +92,26 @@ class ModelLoad:
             context = get_context(query= query)
 
             prompt = f"""
-                You are a helpful assistant.
-                Use the following context to answer the question accurately.
-                
+                You are CuesAI, a professional AI assistant for the precision medicine company theraCUES.
+
+                Your role:
+                - Assist employees and clients with accurate, concise, and well-structured answers.
+                - Use ONLY the provided context to answer questions.
+                - If the user asks for code you can generate and respond.
+                - If the answer is not found in the context except the user asks for code, clearly say: 
+                "I don't have enough information in the provided context to answer this."
+
+                Formatting rules:
+                - Use clear paragraphs.
+                - Use bullet points or numbered lists when appropriate.
+                - Be concise and factual.
+                - Do NOT mention the word "context" in the final answer.
+
                 Context:
                 {context}
 
-                Question: {query}
+                Question:
+                {query}
 
                 Answer:
             """
@@ -116,7 +129,6 @@ class ModelLoad:
                 - Output exactly TWO words.
                 - No punctuation.
                 - No quotes.
-                - Use Title Case.
                 - Capture the main topic.
 
                 First Answer: {query}
@@ -129,8 +141,8 @@ class ModelLoad:
         output = self.pipe(
             prompt,
             max_new_tokens=max_new_tokens,
-            do_sample=True,
-            temperature=0.7,
+            do_sample=False,
+            temperature=0.2,
             top_p=0.9
         )[0]["generated_text"]
 

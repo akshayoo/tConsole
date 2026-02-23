@@ -3,7 +3,7 @@
 import styles from './Catalog.module.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosApi from '@/lib/api'
 
 export function CatalogComp(){
 
@@ -15,7 +15,7 @@ export function CatalogComp(){
     async function fieldsData(){
 
       try{
-        const response = await axios.get("http://localhost:6050/items/catalog", {withCredentials : true})
+        const response = await axiosApi.get("/items/catalog")
         console.log(response.data)
         setCatalogData(response.data)
       }

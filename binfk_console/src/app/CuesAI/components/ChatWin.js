@@ -2,11 +2,11 @@
 
 import styles from './ChatWin.module.css';
 import { useState, useEffect } from "react";
-import axios from 'axios';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from 'next/image';
 import { ChatOption } from './ChatOption';
+import axiosApi from '@/lib/api';
 
 
 export function ChatWin() {
@@ -28,7 +28,7 @@ export function ChatWin() {
         async function fetcHistory(){
 
             try{
-                const response = await axios.get("http://localhost:6050/cuesai/history", {withCredentials : true})
+                const response = await axiosApi.get("/cuesai/history")
                 const data = response.data
 
                 setPreviousChats(data.payload)
@@ -48,10 +48,8 @@ export function ChatWin() {
         setInference([])
         try{
 
-            const response = await axios.post("http://localhost:6050/cuesai/conversationspop",
-                {
-                    convo_id : convoId
-                }, {withCredentials : true}
+            const response = await axiosApi.post("/cuesai/conversationspop",
+                {convo_id : convoId}
             )
 
             const data = response.data
@@ -123,8 +121,8 @@ export function ChatWin() {
 
         try{
 
-            const response = await axios.post("http://localhost:6050/cuesai/llminference",
-                query_payload, {withCredentials : true}
+            const response = await axiosApi.post("cuesai/llminference",
+                query_payload
             )
 
             const data = response.data
@@ -181,7 +179,7 @@ function ChatSlideBar({previousChats, conversationPop, newChat}) {
                             <button onClick={() => setChatOptions(chatOptions === chathist._id ? null : chathist._id)} >&#8942;</button>
                             
                         </div>
-                        {chatOptions === chathist._id && <ChatOption /> }
+                        {chatOptions === chathist._id && <ChatOption chatHistId= {chathist._id} setChatOptions={setChatOptions} /> }
                     </div>
                 ))}
             </div>

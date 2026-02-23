@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import styles from '../ViewComp.module.css'
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
@@ -36,9 +36,8 @@ export function QcReportPushForm({setQcDataForm, projectId}){
                 fd.append(key, value);
             })
 
-            const response = await axios.post("http://localhost:6050/project/qcdataupdate", 
-                fd,
-                {withCredentials : true}
+            const response = await axiosApi.post("/project/qcdataupdate", 
+                fd
             )
 
             const data = response.data
@@ -174,9 +173,8 @@ export function LibQcReportPushForm({setLibQcDataForm, projectId}){
                 formd.append(key, value)
             })
             
-            const response = await axios.post("http://localhost:6050/project/libqcdataupdate",
-                formd,
-                {withCredentials : true}
+            const response = await axiosApi.post("/project/libqcdataupdate",
+                formd
             )
 
             const data = response.data
@@ -282,9 +280,8 @@ export function BinfReportPushForm({setBinfDataForm, projectId}){
                 binff.append(key, value)
             })
 
-            const response = await axios.post("http://localhost:6050/project/binfkilldataupdate",
-                binff,
-                {withCredentials : true}
+            const response = await axiosApi.post("/project/binfkilldataupdate",
+                binff
             )
             
             const data = response.data

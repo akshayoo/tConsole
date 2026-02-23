@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { NcounterForm } from './nCounter/NcounterForm';
 import { NgSForm } from './NGS/NgSForm';
 import { GeoMxForm } from './GeoMx/GeoMxForm';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 
 
 const applications = {
@@ -32,8 +32,8 @@ export function LabFormComp() {
         }
 
         try {
-            const response =  await axios.post("http://127.0.0.1:6050/intake/initialinfo",
-                {"project_token" : searchCont}, {withCredentials : true}
+            const response =  await axiosApi.post("/intake/initialinfo",
+                {"project_token" : searchCont}
             )
 
             const data = response.data

@@ -1,7 +1,7 @@
 "use client"
 import styles from './Insert.module.css'
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import axiosApi from '@/lib/api';
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
 
@@ -33,8 +33,8 @@ export function InsertComp() {
 
         try {
 
-            const response = await axios.post("http://localhost:6050/items/insert",
-                formData, {withCredentials : true}
+            const response = await axiosApi.post("/items/insert",
+                formData
             )
 
             const data = response.data

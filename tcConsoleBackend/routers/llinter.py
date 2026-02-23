@@ -9,7 +9,7 @@ import time
 from bson import ObjectId
 from bson.errors import InvalidId
 
-MODEL = "/home/akshay/Projects/models/text/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/0d4b76e1efeb5eb6f6b5e757c79870472e04bd3a"
+MODEL = "/home/ak/Projects/Models/TextGeneration/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/8afb486c1db24fe5011ec46dfbe5b5dccdb575c2"
 
 LLM = ModelLoad(path=MODEL)   
 LLM.load_in4bit() 
@@ -189,3 +189,45 @@ async def interaction(payload : Inference , usertok : dict = Depends(parse_token
             status_code= 500,
             detail= "Internal server error"
         )
+
+
+@router.post("/deletchat")
+async def delet_chat(payload : ConversationPop, _ : dict = Depends(parse_token)):
+
+    convo_id = payload.convo_id
+    conversations_collection = collections_load("cuesaiConversations")
+
+    try:
+        
+        delete_check = conversations_collection.find_one({"_id" : ObjectId(convo_id)},
+                                                         {
+                                                            "deleted" : 1
+                                                         })
+        
+        if delete_check.get("deleted") :
+            return{
+                "status" : False,
+                "message"  : "Conversation not found"
+            }
+
+        conversations_collection.update_one({"_id" : ObjectId(convo_id)},
+                                            {
+                                                "$set" : {
+                                                    "deleted" : True
+                                                }
+                                            })
+        
+        return{
+            "status" : True,
+            "message"  : "Conversation deleted"
+        }
+        
+
+    except Exception as e:
+        print(str(e))
+        raise HTTPException(
+            status_code= 500,
+            detail= "Deleting chat failed"
+        )
+
+

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import styles from './signupComp.module.css'
 import Image from "next/image"
 import Link from 'next/link';
@@ -30,7 +30,7 @@ export function SignupComp() {
 
         try{
 
-            const response = await axios.post("http://127.0.0.1:6050/auth/signup",
+            const response = await axiosApi.post("/auth/signup",
                 formData
             )
 

@@ -1,10 +1,10 @@
 "use client"
 import styles from './ProjectDetails.module.css'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosApi from '@/lib/api';
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
-import { toast } from 'react-toastify';
+
 
 export function ProjectDetailsComp() {
     
@@ -46,7 +46,7 @@ export function ProjectDetailsComp() {
     useEffect(() =>{
         async function DataLoad(){
             try{
-                const response = await axios.get("http://localhost:6050/initialization/popservices", {withCredentials : true})
+                const response = await axiosApi.get("/initialization/popservices")
                 setServicesClass(response.data)
             }
             catch(error){
@@ -158,10 +158,9 @@ export function ProjectDetailsComp() {
         setSubmitDis(true)
 
         try {
-            const response = await axios.post("http://localhost:6050/initialization/startproject",
+            const response = await axiosApi.post("/initialization/startproject",
                 payload,
-                {   withCredentials: true,
-                    headers: { "Content-Type": "application/json" } }
+                {headers: { "Content-Type": "application/json" } }
             )
 
             const data = response.data
