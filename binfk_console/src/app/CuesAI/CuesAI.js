@@ -5,9 +5,7 @@ export function CuesAI(){
     return(
         <>
             <NavBar />
-
             <ChatWin />
-
         </>
     );
 }
