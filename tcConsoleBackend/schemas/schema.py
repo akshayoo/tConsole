@@ -111,3 +111,6 @@ class Inference(BaseModel):
     new_chat : bool 
     convo_id : Optional[str] = None
     user_message: str
+
+class Email(BaseModel):
+    email : EmailStr

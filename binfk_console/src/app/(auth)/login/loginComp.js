@@ -46,7 +46,7 @@ async function signIn(e) {
         }
         catch(error) {
             console.log(error)
-            toastSet(setToast, false, "Unable to reach the server please try after some time")
+            toastSet(setToast, false, "Unable to reach the servers please try after some time")
         }
     }
     

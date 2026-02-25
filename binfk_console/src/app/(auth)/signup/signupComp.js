@@ -7,55 +7,56 @@ import Image from "next/image"
 import Link from 'next/link';
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
+import { sendStatusCode } from 'next/dist/server/api-utils';
 
 export function SignupComp() {
 
-    const [formData, setFormData] = useState({
-        "username" : "",
-        "password" : "",
-        "password_re" : ""
+    const [toast, setToast] = useState(null)
+
+    const [getCode, setGetCode] = useState(null)
+
+    const [signUpMail, setSignUpMail] = useState({
+        "email" : ""
     })
 
-    async function signUp(e) {
+    const handleEmailChange = (e) => {
+        const {name, value} = e.target
+        setSignUpMail(prev => ({
+            ...prev, [name] : value
+        }))  
+    }
 
-         e.preventDefault()
+    async function sendSignupCode(e){
 
-        if(!formData.username || !formData.password || !formData.password_re){
-            alert("Fields missing")
-            return
+        e.preventDefault()
+
+        if(!signUpMail.email){
+            toastSet(setToast, false, "Missing email")
         }
-
-        if(formData.password !== formData.password_re){
-            alert("Password missmatch")
-            return
-        }
-
         try{
 
-            const response = await axiosApi.post("/auth/signup",
-                formData
-            )
+            const response = await axiosApi.post("/auth/signupmail", signUpMail)
+            const data = response.data
 
-            alert(response.data.status)
+            if(!data.status){
+                toastSet(setToast, false,  data.message)
+                return
+            }
 
-            window.location.href = "/login"
+            toastSet(setToast, data.status, data.message)
+            if(!data.payload){
+                toastSet(setToast, false,  data.message)
+                return
+            } 
 
+            setGetCode(data.payload)
+            toastSet(setToast, data.status, data.message)
         }
-        catch(error) {
-            console.log(error);
-            alert("Not a user");
+        catch(err){
+            console.log(err)
+            toastSet(setToast, false, "Unable to process requests right now, Please try again after some time")
         }
     }
-    
-    const handleChange = (e) => {
-
-        const{name, value} = e.target
-
-        setFormData(prev =>({
-            ...prev, [name] : value
-        }))
-    }
-
 
     return (
         <div className={styles.loginPage}>
@@ -66,32 +67,66 @@ export function SignupComp() {
                 </div>
                 <h1 className={styles.loginTitle}>tCONSOLE</h1>
                 <p className={styles.loginSubtitle}>Register as a user</p>
-
-                <form className={styles.loginForm} onSubmit={signUp}>
-                    <div className={styles.formGroup}>
-                        <label>Employee Email</label>
-                        <input name="username" type="text" placeholder="user@theracues.com" onChange={handleChange}/>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label>Type Password</label>
-                        <input name="password" type="password" placeholder="Enter your password" onChange={handleChange}/>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label>Re-type Password</label>
-                        <input name="password_re" type="password" placeholder="Re-enter your password" onChange={handleChange}/>
-                    </div>
-
-                    <button type="submit" className={styles.loginBtn}>Sign Up</button>
-                </form>
                 <p className={styles.loginSubtitle}><Link className={styles.Link} href="/login">Sign in</Link></p>
+
+                {getCode ? <GetCode /> : <SighUp sendSignupCode={sendSignupCode} handleEmailChange={handleEmailChange} />}
 
                 <p className={styles.loginFooter}>
                     Authorized personnel only
                 </p>
             </div>
+            {toast && <MessageComp condition={toast.condition} message={toast.message} />}
         </div>
   );
+}
+
+function SighUp({sendSignupCode, handleEmailChange}) {
+
+    return(
+
+        <form className={styles.loginForm} onSubmit={sendSignupCode}>
+            <div className={styles.formGroup}>
+                <label>Employee Email</label>
+                <input name="email" type="text" placeholder="eg: user@theracues.com" onChange={handleEmailChange}/>
+            </div>
+
+            <button type="submit" className={styles.loginBtn}>Get code</button>
+        </form>
+    );
+}
+
+function GetCode() {
+
+    return(
+
+        <form className={styles.loginForm} onSubmit={sendSignupCode}>
+            <div className={styles.formGroup}>
+                <label>Code</label>
+                <input name="username" type="text" placeholder="Enter the code" onChange={handleChange}/>
+            </div>
+
+            <button type="submit" className={styles.loginBtn}>Submit</button>
+        </form>
+    );
+}
+
+
+function PasswdComp(){
+    return(
+  
+        <form className={styles.loginForm} onSubmit={signUp} >
+            <div className={styles.formGroup}>
+                <label>Type Password</label>
+                <input name="password" type="password" placeholder="Enter your password" onChange={handleChange}/>
+            </div>
+
+            <div className={styles.formGroup}>
+                <label>Re-type Password</label>
+                <input name="password_re" type="password" placeholder="Re-enter your password" onChange={handleChange}/>
+            </div>
+
+            <button type="submit" className={styles.loginBtn}>Sign Up</button>
+        </form>
+    );
 }
 

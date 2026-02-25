@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Verification</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .outer-table {
+      background-color: #f2f2f2;
+      padding: 40px 0;
+      width: 100%;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+      width: 540px;
+    }
+
+
+    .header {
+      padding: 32px 30px 24px;
+      border-bottom: 1px solid #e8e8e8;
+      text-align: center;
+    }
+
+    .logo-icon {
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .brand-name {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: #004730;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .title-bar {
+      background-color: #0070bbcc;
+      padding: 10px 30px;
+    }
+
+    .title-bar p {
+      margin: 0;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+
+    .body-cell {
+      padding: 32px 36px 28px;
+    }
+
+    .greeting {
+      margin: 0 0 14px;
+      color: #2c2c2c;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .intro {
+      margin: 0 0 28px;
+      color: #666666;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .code-table {
+      margin-bottom: 28px;
+      width: 100%;
+    }
+
+    .code-cell {
+      padding: 28px 0;
+      background-color: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .logo-bar img{
+        height: 50px;
+    }
+
+    .code-label {
+      margin: 0 0 8px;
+      color: #999999;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .code-value {
+      margin: 0;
+      color: #004730;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 14px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .notice {
+      margin: 0;
+      padding: 10px 14px;
+      background-color: #f7f7f7;
+      border-left: 3px solid #004730;
+      color: #777777;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .notice a {
+      color: #004730;
+      text-decoration: none;
+    }
+
+    .footer {
+      background-color: #0070bbcc;
+      padding: 14px 30px;
+    }
+
+    .footer p {
+      margin: 0;
+      color: #1f1f1f;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <table class="outer-table" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+
+        <table class="container" cellpadding="0" cellspacing="0">
+
+
+          <tr>
+            <td class="header">
+                <div class="logo-bar">
+                    <img src="file:///home/ak/Projects/FirstFullStackWebApi/binfk_backend/templates/logo.webp" alt="theracues logo">
+                </div>
+
+            </td>
+          </tr>
+
+          <tr>
+            <td class="title-bar">
+              <p>Email Verification</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="body-cell">
+
+              <p class="greeting">Dear <strong>{{ name }}</strong>,</p>
+              <p class="intro">
+                Use the verification code below to complete your account setup. This code expires in <strong>10 minutes</strong>.
+              </p>
+
+              <table class="code-table" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="code-cell">
+                    <p class="code-label">Your verification code</p>
+                    <p class="code-value">{{ signup_code }}</p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <tr>
+            <td class="footer">
+              <p>This is an automated message- please do not reply directly to this email.</p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

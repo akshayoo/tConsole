@@ -130,7 +130,7 @@ async def samsub_gen(payload : ProjId, usertok : dict = Depends(parse_token)):
                                     {
                                         "_id" : 0,
                                         "project_info" : 1,
-                                        "service_info" : 1,
+                                        "service_info   " : 1,
                                         "sample_submission" : 1
                                     })
         

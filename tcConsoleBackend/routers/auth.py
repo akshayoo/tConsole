@@ -1,6 +1,9 @@
 from fastapi import APIRouter, HTTPException, Response, Depends
 from jose import JWTError
-from schemas.schema import AuthLogin, AuthSignup
+from schemas.schema import AuthLogin, AuthSignup, Email
+from utils.confgmail import email_config
+from jinja2 import Environment, FileSystemLoader
+import random
 from utils.dbfunc import collections_load
 from utils.cache import to_hash, varify_hash
 from utils.jwt_utils import create_access_token, parse_token
@@ -33,7 +36,7 @@ async def login(payload : AuthLogin, response : Response):
         if not data : return {"status" : False,
                               "message" : "User not found, please sign up"}
         
-        if data.get("is_active") == False : return {"status" : "Not an active user contact admin"}
+        if data.get("is_active") == False : return {"status" : False, "message" : "Not an active user contact admin"}
 
         if not varify_hash(password, data.get("password_hash")):
             return {"status": False,
@@ -51,7 +54,7 @@ async def login(payload : AuthLogin, response : Response):
             value=token,
             httponly=True,
             samesite="lax",     
-            secure=False,       
+            secure=True,       
             max_age=60*60*8,
             path="/"         
         )
@@ -67,6 +70,8 @@ async def login(payload : AuthLogin, response : Response):
             detail= "Login unsuccessfull"
         )
     
+
+
 
 @router.get("/whoami")
 async def whoami(whoami : dict = Depends(parse_token)):
@@ -87,13 +92,15 @@ async def whoami(whoami : dict = Depends(parse_token)):
         )
 
 
+
+
 @router.post("/logout")
 async def logout(response: Response):
 
     response.delete_cookie(
         key="auth_token",
         path="/",
-        secure=False,
+        secure=True,
         samesite="lax"
     )
 
@@ -101,6 +108,78 @@ async def logout(response: Response):
         "status": True,
         "message": "logged out"
     }
+
+
+
+@router.post("/signupmail")
+async def send_signupcode(payload : Email):
+
+    user_email = payload.email
+    user_collection = collections_load("tcUsers")   
+
+    try:
+
+        data = user_collection.find_one(
+            {"user_email": user_email},
+            {"_id": 0, "name" : 1}
+        )
+
+        if not data:
+            return {"status": False,
+                    "message" : "Not an authorized user"}
+
+        if data.get("has_signed_up"):
+            return {"status": False,
+                    "message" : "Already a user please login"}
+        
+        signup_code = random.randint(100000, 999999)
+
+        user_collection.update_one({"user_email": user_email},
+                                   {
+                                       "$set" : {"signup_code" : signup_code}
+                                   })
+        
+        name = data.get("name")
+        
+        env = Environment(loader= FileSystemLoader("./templates"), autoescape= True)
+        template = env.get_template("signupcodetemplate.html")
+
+        mail_html = template.render(
+            name=name,
+            signup_code = signup_code
+        )
+
+        status = await email_config(
+            subject="tConsole- Email Varification",
+            cc_mail=[],
+            to_mail=user_email,
+            mail_html=mail_html,
+        )
+
+        if not status:
+            return{
+                "status" : False,
+                "message" : "Unable to send code",
+                "payload" : False
+            }  
+
+        return{
+            "status" : True,
+            "message" : "Sign-up code sent successfully, Please check your mail",
+            "payload" : {
+                "name" : name,
+                "username" : user_email
+            }
+        }
+
+
+    except Exception as e:
+        print(str(e))
+        raise HTTPException(
+            status_code= 500,
+            detail= "Sign-up Failed"
+        )
+
 
 
 
