@@ -91,6 +91,7 @@ class AuthLogin(BaseModel):
     password : str
 
 class AuthSignup(BaseModel):
+    name : str
     username : str
     password : str
     password_re : str

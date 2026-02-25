@@ -196,15 +196,24 @@ async def validate_signupcode(payload : ValidateSignup):
 
         data = user_collection.find_one(
             {"user_email": username},
-            {"_id": 0, "status_code" : 1}
+            {"_id": 0, "signup_code" : 1}
         )
 
-        if not code == data.get("status_code"):
+        if not data:return {"status": False, "message": "User not found", "payload": False}
+        
+        if not data.get("signup_code"):return { "status": False, "message": "No code generated. Please request a new code", "payload": False}
+
+        if not code == data.get("signup_code"):
             return {
                 "status" : False,
                 "message" : "Not a valid varification code please try again with a valid one",
                 "payload" : False
             }
+        
+        user_collection.update_one(
+            {"user_email": username},
+            {"$unset": {"signup_code": ""}}
+        )
         
         return{
             "status" : True,
@@ -226,13 +235,20 @@ async def validate_signupcode(payload : ValidateSignup):
 @router.post("/signup")
 async def signup(payload: AuthSignup):
 
-    username = payload.username.strip()
+    username = payload.username.lower().strip()
     password = payload.password
+    password_re = payload.password_re
 
     user_collection = collections_load("tcUsers")   
     auth_collection = collections_load("tcAuth")    
 
     try:
+
+        if password != password_re:
+            return{
+                "status" : False,
+                "message" : "Passwords do not match"
+            }
 
         data = user_collection.find_one(
             {"user_email": username},
@@ -240,10 +256,12 @@ async def signup(payload: AuthSignup):
         )
 
         if not data:
-            return {"status": "Not an authorized user"}
+            return {"status": False,
+                    "message" : "Not an authorized user"}
 
         if data.get("has_signed_up"):
-            return {"status": "Already a user please login"}
+            return {"status": False,
+                    "message" : "Already a user please login"}
 
         auth_doc = {
             "name": data.get("name"),
@@ -265,7 +283,8 @@ async def signup(payload: AuthSignup):
             }
         )
 
-        return {"status": "Sign Up completed please sign in"}
+        return {"status": True,
+                "message" : "Sign-up complete, please login"}
 
     except Exception as e:
         print(str(e))
