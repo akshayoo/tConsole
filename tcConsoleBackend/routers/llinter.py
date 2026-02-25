@@ -9,8 +9,8 @@ import time
 from bson import ObjectId
 from bson.errors import InvalidId
 
-#MODEL = "/home/ak/Projects/Models/TextGeneration/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/8afb486c1db24fe5011ec46dfbe5b5dccdb575c2"
-MODEL = "/home/akshay/Projects/models/text/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/0d4b76e1efeb5eb6f6b5e757c79870472e04bd3a"
+MODEL = "/home/ak/Projects/Models/TextGeneration/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/8afb486c1db24fe5011ec46dfbe5b5dccdb575c2"
+#MODEL = "/home/akshay/Projects/models/text/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/0d4b76e1efeb5eb6f6b5e757c79870472e04bd3a"
 
 LLM = ModelLoad(path=MODEL)   
 LLM.load_in4bit() 
