@@ -1,0 +1,156 @@
+
+.loginPage {
+    height: 100vh;
+    width: 100vw;
+    display:  flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    /*background-image: url("/beautiful-mountains-landscape.jpg");*/
+    background: #1e293b;
+    background-size: cover;
+    padding-right: 120px;
+    box-sizing: border-box;
+}
+
+
+.signupCard {
+    width: 380px;
+    background: #0b1220c4;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    color: #ffffff;
+}
+
+.loginCard {
+    width: 380px;
+    background: #0b1220c4;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    color: #ffffff;
+}
+
+.loginImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginForm {
+    margin-top: 20px;
+}
+
+.loginTitle {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.loginSubtitle {
+    text-align: center;
+    color: #bbc1ca;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.formGroup label {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #cbd5f5;
+}
+
+.formGroup input {
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid #1e293b;
+    background: #020617;
+    color: white;
+    font-size: 14px;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 1px #38bdf8;
+}
+
+
+.loginBtn {
+    margin-top: 10px;
+    padding: 12px;
+    background: #f89e38;
+    border: none;
+    border-radius: 6px;
+    color: #020617;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.loginBtn:hover {
+    background: #e9910e;
+}
+
+.loginFooter {
+    margin-top: 22px;
+    font-size: 12px;
+    text-align: center;
+    color: #64748b;
+}
+
+.Link{
+    color: #38bdf8;
+}
+
+
+.loader {
+    width: 108px;
+    height: 16px;
+    background:
+      radial-gradient(circle 8px at 8px center, #FFF 100%, transparent 0),
+      radial-gradient(circle 8px at 8px center, #FFF 100%, transparent 0);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    position: relative;
+    animation: ballX 1s linear infinite;
+}
+.loader:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background:#FFF;
+    inset:0;
+    margin:auto;
+    animation: moveX 1s cubic-bezier(0.5,300,0.5,-300) infinite;
+}
+@keyframes ballX {
+    0%,25%,50%,75%, 100%  {background-position: 25% 0,75% 0}
+    40%     {background-position: 25% 0,85% 0}
+    90%     {background-position: 15% 0,75% 0}
+}
+@keyframes moveX {
+    100% {transform:translate(0.15px)}
+}
+     
+
+    
+
+

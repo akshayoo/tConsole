@@ -19,7 +19,7 @@ export function ItemsComp() {
                     <div className={styles.Card}>
                         <h3>Catalog</h3>
                         <p>View Services</p>
-                        <Link href="/Items/Catalog" className={styles.CardLink}>
+                        <Link href="/items/catalog" className={styles.CardLink}>
                             Explore →
                         </Link>
                     </div>
@@ -29,7 +29,7 @@ export function ItemsComp() {
                         <h3>Insert</h3>
                         <p>Insert custom services</p>
                         <div className={styles.ActionRow}>
-                            <Link href="/Items/Insert" className={styles.CardLink}>
+                            <Link href="/items/insert" className={styles.CardLink}>
                                 Explore →
                             </Link>
                         </div>

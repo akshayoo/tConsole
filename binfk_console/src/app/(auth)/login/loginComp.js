@@ -74,7 +74,7 @@ async function signIn(e) {
                 <div className={styles.loginImg}>
                     <Image src="/logo.webp" alt="Theracues logo" width={125} height={40} className={styles.navLogo} />
                 </div>
-                <h1 className={styles.loginTitle}>tCONSOLE</h1>
+                <h1 className={styles.loginTitle}>tConsole</h1>
                 <p className={styles.loginSubtitle}>Sign in to continue</p>
                 <p className={styles.loginSubtitle}>Not Registered <Link className={styles.Link} href= '/signup'>Sign Up</Link> </p>
 
@@ -93,6 +93,8 @@ async function signIn(e) {
                         {buttonDis ? <><span className={styles.loader}></span></> : <>Sign In</>}
                     </button>
                 </form>
+
+                <p className={styles.loginSubtitle}><Link className={styles.Link} href= '/forgot-password'>Forgot password</Link> </p>
 
                 <p className={styles.loginFooter}>
                     Authorized personnel only

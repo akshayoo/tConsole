@@ -1,7 +1,7 @@
 import "./globals.css"
 
 export const metadata = {
-  title: "tconsole",          
+  title: "tConsole",          
   description: "Theracues internal console for project management, sample tracking etc.",
   icons: {
     icon: "/favicon.ico",      

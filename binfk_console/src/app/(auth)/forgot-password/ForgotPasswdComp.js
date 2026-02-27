@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import axiosApi from '@/lib/api';
-import styles from './signupComp.module.css'
+import styles from './ForgetPComp.module.css'
 import Image from "next/image"
 import Link from 'next/link';
 import { toastSet } from '@/components/toastfunc';
 import { MessageComp } from '@/components/messageComp';
 import { useRouter } from 'next/navigation';
 
-export function SignupComp() {
+export function ForgotPasswdComp() {
 
     const[buttonDis, setButtonDis] = useState(false)
 

@@ -92,7 +92,7 @@ export function ProjectsComp(){
                     <div className={styles.Card}>
                         <h3>View</h3>
                         <p>View Projects</p>
-                        <Link href="/LabDB/View" className={styles.CardLink}>
+                        <Link href="/projects/view" className={styles.CardLink}>
                             Explore →
                         </Link>
                     </div>

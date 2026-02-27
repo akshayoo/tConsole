@@ -22,7 +22,7 @@ export function HomePage() {
                     <div className={styles.Card}>
                         <h3>Cues AI</h3>
                         <p>AI- powered chat bot</p>
-                        <Link href="/CuesAI" className={styles.CardLink}>
+                        <Link href="/cuesai" className={styles.CardLink}>
                             Explore →
                         </Link>
                     </div>
@@ -33,7 +33,7 @@ export function HomePage() {
                         <p>Create, view, and manage your projects.</p>
 
                         <div className={styles.ActionRow}>
-                            <Link href="/LabDB" className={styles.CardLink}>
+                            <Link href="/projects" className={styles.CardLink}>
                                 Explore →
                             </Link>
                         </div>
@@ -45,7 +45,7 @@ export function HomePage() {
                         <p>Browse and organize available items.</p>
 
                         <div className={styles.ActionRow}>
-                            <Link href="/Items" className={styles.CardLink}>
+                            <Link href="/items" className={styles.CardLink}>
                                 Explore →
                             </Link>
                         </div>
@@ -56,7 +56,7 @@ export function HomePage() {
                         <p>Track and review all submissions.</p>
 
                         <div className={styles.ActionRow}>
-                            <Link href="/SSubTrack" className={styles.CardLink}>
+                            <Link href="/submissions" className={styles.CardLink}>
                                 Explore →
                             </Link>
                         </div>
