@@ -1,0 +1,25 @@
+html, body, #__next {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: rgb(247, 247, 247);
+  font-family: "Google Sans", Roboto, Helvetica, Arial, sans-serif;
+  color: rgb(62, 62, 62);
+}
+
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.appContent {
+  flex: 1;
+  overflow: auto;
+}

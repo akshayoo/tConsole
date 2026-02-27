@@ -1,0 +1,383 @@
+.ProgCompDiv {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.projDetSide {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.SideFDiv {
+  display: flex;
+  justify-content: left;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid rgb(240, 240, 240);
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px rgb(221, 221, 221);
+}
+
+.SideFDiv label,
+.SideFDiv input{
+  padding: 5px;
+  margin: 2px;
+  vertical-align: top;
+}
+
+.SideFDiv input{
+  border: 1px solid gray;
+  outline: none;
+  border-radius: 5px;
+}
+
+.SideSDiv {
+  border: 1px solid rgb(240, 240, 240);
+  background-color: #ffffff;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px rgb(221, 221, 221);
+}
+
+.SideInnerComp {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  font-size:  14px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 4px;
+  background-color: #e8f3ff;
+}
+
+.SideInnerComp div {
+  font-size:  14px;
+  margin: 2px;
+  display: flex;
+  justify-content: left;
+  padding: 5px;
+}
+
+
+.MainFormPage {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.FormBox {
+    box-shadow: 1px 1px 2px 2px rgb(181, 181, 181);
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    margin: 10px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.TableDiv::-webkit-scrollbar {
+  width: 8px;
+  margin-right: 5px;
+}
+
+.TableDiv::-webkit-scrollbar-track {
+  background: #00000000;
+  border-radius: 25px;
+}
+
+.TableDiv::-webkit-scrollbar-thumb {
+  background: #a1a1a1;
+  border-radius: 25px;
+}
+
+.TableDiv::-webkit-scrollbar-thumb:hover {
+  background: #8b8b8b;
+}
+
+.FormFirSec {
+   width: 600px;
+   border-right: 1px solid rgb(236, 236, 236);
+   padding: 10px;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   overflow-y: auto;
+}
+
+.FFComp{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 14px;
+  padding: 20px;
+}
+
+.FFComp input,
+.FFComp select{
+  padding: 5px;
+  border: 1px solid rgb(179, 179, 179);
+  border-radius: 4px;
+}
+
+.FFComp input:focus,
+.FFComp select:focus{
+  outline: none;
+  border: 1px solid rgb(1, 119, 255);
+  border-radius: 4px;
+}
+
+.FFComp textarea{
+  border: 1px solid rgb(179, 179, 179);
+  border-radius: 8px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.FFComp textarea:focus{
+  outline: none;
+  border: 1px solid rgb(1, 119, 255);
+}
+
+.FFTableComp{
+  font-size: 14px;
+  padding: 10px;
+}
+
+.FFTableComp div{
+  font-size: 14px;
+  padding: 10px;
+}
+
+.FormSceSec {
+  flex: 1;
+  padding: 20px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.SamplesTable {
+  border-collapse: separate;      
+  border-spacing: 0;
+  font-size: 12px;
+  padding: 5px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.SamplesTable {
+  width: 100%;
+  font-size: 12px;
+  border-collapse: separate;   
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.SamplesTable th {
+  color: #2f3e46;
+  font-weight: 600;
+  padding: 8px;
+  text-align: center;
+  background-color: #e8f3ff;
+}
+
+.SamplesTable td {
+  padding: 8px;
+  text-align: center;
+  color: #333;
+}
+
+.SamplesTable th,
+.SamplesTable td {
+  border-left: none;
+  border-right: none;
+}
+
+
+.FRad input[type="radio"] {
+  display: none;
+}
+
+.FRad label {
+  cursor: pointer;
+}
+
+.FRad label:not(:first-child) {
+  padding: 5px 10px;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  margin: 5px;
+}
+
+.FRad input[type="radio"]:checked + label {
+  background: rgb(218, 218, 218);
+  color: rgb(48, 48, 48);
+}
+
+
+.FormTableSec {
+  height: 100%;
+}
+
+.DisplayTable {
+  height: 100%;
+  border-top: 1px solid rgb(224, 224, 224);
+}
+
+.TableDiv {
+  height: 80%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ButtonSec {
+  height: 20%;
+}
+
+
+.DispTab {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  color: #1f2933;
+  border: 1px solid #d0d5dd;
+  margin: 10px;
+}
+
+.DispTab thead th {
+  background-color: #f2f4f7;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid #cbd5e1;
+  border-right: 1px solid #d0d5dd;
+  white-space: nowrap;
+}
+
+.DispTab thead th:last-child {
+  border-right: none;
+}
+
+.DispTab tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.DispTab tbody td:last-child {
+  border-right: none;
+}
+
+.DispTab tbody:last-child tr:last-child td {
+  border-bottom: none;
+}
+
+.DispUpbtn {
+  border-top: 1px solid rgb(224, 224, 224);
+}
+
+.DispUpbtn button {
+  padding: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background-color: #c3e1ff;
+  color: #1f2937;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.DispUpbtn button:hover {
+  background-color: #7abcff;
+  border-color: #9fa0a1;
+}
+
+.DispUpbtn label{
+  font-size: 14px ;
+  margin-left: 20px;
+}
+
+.DispUpbtn input {
+  font-size:  14px;
+  margin-left: 20px;
+}
+
+.SendAppButton {
+    display: flex ;
+    justify-content: center;
+}
+
+.SendAppButton button{
+    padding: 8px 12px ;
+    background-color: rgb(0, 50, 124);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    color: white;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: background-color 0.5s ease;
+    transition: box-shadow 0.5s ease;
+}
+
+.SendAppButton button:hover{
+    background-color: rgb(0, 67, 166);
+    box-shadow: 1px 1px 5px rgb(56, 56, 56) ;
+}
+
+
+.loader {
+    width: 108px;
+    height: 16px;
+    background:
+      radial-gradient(circle 8px at 8px center, #FFF 100%, transparent 0),
+      radial-gradient(circle 8px at 8px center, #FFF 100%, transparent 0);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    position: relative;
+    animation: ballX 1s linear infinite;
+}
+.loader:before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background:#FFF;
+    inset:0;
+    margin:auto;
+    animation: moveX 1s cubic-bezier(0.5,300,0.5,-300) infinite;
+}
+@keyframes ballX {
+    0%,25%,50%,75%, 100%  {background-position: 25% 0,75% 0}
+    40%     {background-position: 25% 0,85% 0}
+    90%     {background-position: 15% 0,75% 0}
+}
+@keyframes moveX {
+    100% {transform:translate(0.15px)}
+}
+     

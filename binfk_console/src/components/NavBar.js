@@ -69,28 +69,28 @@ function NavBtns() {
                 </button>
             </Link>
 
-            <Link href = "/CuesAI">
+            <Link href = "/cuesai">
                 <button
                     className= {styles.navBtns}>
                     {navLink.aichat}
                 </button>
             </Link>
 
-            <Link href="/LabDB">
+            <Link href="/projects">
                 <button
                     className= {styles.navBtns}>
                     {navLink.projects}
                 </button>
             </Link>
 
-            <Link href="/Items">
+            <Link href="/items">
                 <button
                     className= {styles.navBtns}>
                     {navLink.items}
                 </button>
             </Link>
 
-            <Link href="/SSubTrack">
+            <Link href="/submissions">
                 <button 
                     className= {styles.navBtns}>
                     {navLink.intake}

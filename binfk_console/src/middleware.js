@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
         const token = request.cookies.get("auth_token");
         const pathname = request.nextUrl.pathname;
 
-        const isPublic = pathname === "/login" || pathname === "/signup" || pathname === "/SSubTrack/LabForm" 
+        const isPublic = pathname === "/login" || pathname === "/signup" || pathname === "/sample-submissions" 
 
         if (!token && !isPublic) { 
             return NextResponse.redirect(new URL("/login", request.url));
