@@ -209,7 +209,7 @@ export function SignupComp() {
                 </div>
                 <h1 className={styles.loginTitle}>tConsole</h1>
                 <p className={styles.loginSubtitle}>Register as a user</p>
-                <p className={styles.loginSubtitle}><Link className={styles.Link} href="/login">Sign in</Link></p>
+                <p className={styles.loginSubtitle}>Already a user <Link className={styles.Link} href="/login">Sign in</Link></p>
 
                 {getCode ? <GetCode buttonDis={buttonDis} getCode={getCode} validateCode={validateCode} handleValidCodeChange={handleValidCodeChange} /> : 
                 passWd ? <PasswdComp buttonDis={buttonDis} passWd={passWd} signUp={signUp} handlePasswd={handlePasswd} /> :
