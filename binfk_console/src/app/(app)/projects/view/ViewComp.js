@@ -402,6 +402,11 @@ function SampleSubDetails({projectCont, samsubDetails, setSamsubDetails}){
                 <SampleSubDetailsComp samsubDetails={samsubDetails} projectId={projectCont.project_id}
                 setSamsubDetails = {setSamsubDetails}/>)
             }
+            <div className={styles.GridThree}>
+                <div className={styles.ProjecInOnBtn}>
+                    <button className={styles.ProjecInBtn}>{`Resend Submission Link`}</button>
+                </div>
+            </div>
         </div>
     )
 }
@@ -452,11 +457,11 @@ function QcSamDetails({projectCont, qcDetails, setQcDetails}) {
             }
             <div className={styles.GridThree}>
                 <div className={styles.ProjecInOnBtn}>
-                    <button className={styles.ProjecInBtn}>{`Download Template (.csv)`}</button>
-                </div>
-                <div className={styles.ProjecInOnBtn}>
                     <button className={styles.ProjecInBtn} onClick={() => setQcDataForm(true)}>{`Upload QC Report`}</button>
                     {qcDataForm && <QcReportPushForm projectId={projectCont.project_id} setQcDataForm={setQcDataForm}/>}
+                </div>
+                <div className={styles.ProjecInOnBtn}>
+                    <a href='/sample-submission-templates/lib_qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}
@@ -508,11 +513,11 @@ function LibSamDetails({projectCont, libqcDetails, setLibqcDetails}) {
             }
             <div className={styles.GridThree}>
                 <div className={styles.ProjecInOnBtn}>
-                    <button className={styles.ProjecInBtn}>{`Download Template (.csv)`}</button>
-                </div>
-                <div className={styles.ProjecInOnBtn}>
                     <button className={styles.ProjecInBtn} onClick={() => setLibQcDataForm(true)}>{`Upload Lib QC Data`}</button>
                     {libQcDataFrom && <LibQcReportPushForm projectId={projectCont.project_id} setLibQcDataForm ={setLibQcDataForm} />}
+                </div>
+                <div className={styles.ProjecInOnBtn}>
+                    <a href='/sample-submission-templates/qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}
@@ -634,8 +639,10 @@ function Reports({projectCont}) {
                     <button onClick={()=>setfinreportEmailTemp(true)} className={styles.ProjecInBtn}>{`Send Final Report`}</button>
                     {finreportEmailTemp && <EmailReports projectId={projectCont.project_id} sec="finalreport" flow={"Final Project Report"} EmailTemp={setfinreportEmailTemp} />}
                 </div>
-                <div className={styles.ProjecIn}>
-                    <button onClick={() => closeProject(projectCont.project_id)}>{`Close Project`}</button>
+                <div className={styles.FinBtns}>
+                    <button  onClick={() => closeProject(projectCont.project_id)}>{`Close Project`}</button>
+                    <button >{`Delete Project`}</button>
+                    <button disabled >{`Push to projects`}</button>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}

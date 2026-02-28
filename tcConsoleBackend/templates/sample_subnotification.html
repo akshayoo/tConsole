@@ -114,6 +114,15 @@
             font-size: 11px;
             color: #9ca3af;
         }
+        .header-img {
+            margin-right: auto;
+        }
+
+        .header-img img {
+            margin-right: 30px;
+            height: 40px;
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -123,7 +132,9 @@
     <div class="container">
 
         <div class="header">
-            <img src="file:///home/ak/Projects/FirstFullStackWebApi/binfk_backend/templates/logo.webp" alt="theraCUES Logo">
+            <div class="header-img">
+                <img src="https://theracues.com/images/theracues_logo.webp" alt="theracues logo">
+            </div>
             <div class="header-text">
                 <h1>Sample Submission Received</h1>
                 <div class="project-id">Project ID: {{ project_id }}</div>

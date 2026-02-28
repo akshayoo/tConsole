@@ -71,9 +71,9 @@
             margin-bottom: 10px;
         }
 
-        .deliverables-box ul {
+        .deliverables-box p {
             margin: 0;
-            padding-left: 20px;
+            padding: 0;
         }
 
         .email-footer {
@@ -83,6 +83,14 @@
             color: #6b7280;
             text-align: center;
             border-radius: 0 0 8px 8px;
+        }
+        .header-img {
+            margin-left: auto;
+        }
+
+        .header-img img {
+            height: 40px;
+            padding: 5px;
         }
     </style>
 </head>
@@ -99,6 +107,9 @@
                             <p>
                                 Project ID: <strong>{{ project_id }}</strong>
                             </p>
+                            <div class="header-img">
+                                <img src="https://theracues.com/images/theracues_logo.webp" alt="theracues logo">
+                            </div>
                         </td>
                     </tr>
 
@@ -153,23 +164,22 @@
                                     <td><strong>Project Token: Use the token to access the sample submission form</strong></td>
                                     <td>{{ project_token }}</td>
                                 </tr>
+                                <tr>
+                                    <td><strong>Fill your sample submission form</strong></td>
+                                    <td><a href="/submissions" >Sample Submission</a></td>
+                                </tr>
 
                             </table>
 
                             <p style="margin-top: 20px;">
-                                <strong>Project Standard and Added Deliverables:</strong>
+                                <strong>Project Deliverables:</strong>
                             </p>
 
-                            <div class="deliverables-box">
-                                <div>Standard Deliverables</div>
+                            <div>
+
                                 {% for points in standard_deliverables %}
                                 <p>{{ points }}</p>
                                 {% endfor %}
-
-                            </div>
-
-                            <div class="deliverables-box">
-                                <div>Added Deliverables</div>
                                 {% for points in added_deliverables %}
                                 <p>{{ points }}</p>
                                 {% endfor %}

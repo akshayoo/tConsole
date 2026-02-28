@@ -602,19 +602,22 @@
 }
 
 .ProjecInBtn {
-    width: 50%;
+    width: 200px;
     justify-self:center;
     color: white;
     height: 100%;
-    padding: 5px;
+    padding: 6px 5px;
     border: none;
-    border-radius: 5px;
-    background-image: linear-gradient(rgb(0, 58, 92),rgb(0, 42, 77));
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(0, 80, 117),rgb(0, 66, 104));
     transition: background-image 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .ProjecInBtn:hover {
-    background-image: linear-gradient(rgb(0, 85, 141),rgb(0, 77, 129));   
+    background-image: linear-gradient(rgb(0, 85, 141),rgb(0, 77, 129));  
+    transform: translateY(-2px); 
+    box-shadow: 3px 3px 5px rgb(103, 111, 114);
 }
 
 .ProjecOnBtn {
@@ -731,4 +734,34 @@
   border-radius: 6px;
   border: 1px solid #cbd5e1;
   margin-top: 6px;
+}
+
+.FinBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.FinBtns button {
+    padding: 5px;
+    border: 1px solid rgb(71, 8, 0);
+    border-radius: 20px;
+    width: 120px;
+    margin: 2px;
+    background-color: #803300;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.FinBtns button:hover {
+    border: 1px solid gray;
+    background-color: #9e3f00;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 10px rgb(139, 157, 179);
+}
+
+
+.FinBtn button:disabled {
+    cursor: none;
 }

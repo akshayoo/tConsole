@@ -173,9 +173,10 @@ async def form_fetch_mail(payload: ProjectSubmission, usertok : dict = Depends(p
             offering_type =  payload.offering_type,
             service_name =  payload.service_name,
             platform = payload.platform,
-            sam_number=payload.sam_number, 
-            duplicates=payload.duplicates, 
-            extraction=payload.extraction,  
+            sample_type = payload.sample_type,
+            sam_number = payload.sam_number, 
+            duplicates = payload.duplicates, 
+            extraction = payload.extraction,  
 
             standard_deliverables = payload.standard_deliverables,
             added_deliverables = payload.added_deliverables,
@@ -183,7 +184,7 @@ async def form_fetch_mail(payload: ProjectSubmission, usertok : dict = Depends(p
 
         email_status = await email_config(subject= "Project Created Successfully",
                                     to_mail= [payload.email],
-                                    cc_mail= ["itsmeakshay8055@gmail.com"],
+                                    cc_mail= [usertok["username"]],
                                     mail_html= html_cont)
 
         return {
