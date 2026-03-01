@@ -5,6 +5,8 @@ from jinja2 import Environment, FileSystemLoader
 from datetime import date
 from pypdf import PdfWriter, PdfReader
 from io import BytesIO
+
+
 def collections_load(collection: str):
     try:
         CLIENT = MongoClient("mongodb://localhost:27017")

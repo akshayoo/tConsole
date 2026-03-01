@@ -2,10 +2,13 @@ import os
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException, Request
+from dotenv import load_dotenv
 
-SECRET_KEY = "JEIHERKNKEJFIENFJIEFHBEHBHE"
-ALGORITHM = "HS256"
-TOKEN_EXPIRE_HOURS = 90
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+TOKEN_EXPIRE_HOURS = 168
 
 def create_access_token(data: dict):
     
@@ -52,6 +55,6 @@ def parse_token(requests : Request):
 
     token = requests.cookies.get("auth_token")
 
-    if not token: raise HTTPException(status_code= 401, detail= "Not authenticated")
+    if not token: raise HTTPException(status_code= 402, detail= "Not authenticated")
 
     return decode_token(token)

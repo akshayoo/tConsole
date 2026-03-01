@@ -55,7 +55,7 @@ async def login(payload : AuthLogin, response : Response):
             httponly=True,
             samesite="lax",     
             secure=True,       
-            max_age=60*60*8,
+            max_age=60*60*24*7,
             path="/"         
         )
 
