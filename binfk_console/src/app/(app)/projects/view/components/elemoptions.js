@@ -18,6 +18,8 @@ export function QcReportPushForm({setQcDataForm, projectId}){
     })
 
     const[toast, setToast] = useState(null)
+    
+    const[disButton, setDisButton] = useState(false)
 
     async function updateQcData(){
         if(!formData.method_writeup || !formData.method_summary || !formData.concentration_technology ||  
@@ -28,7 +30,10 @@ export function QcReportPushForm({setQcDataForm, projectId}){
                 return
             }
 
+
         try {
+
+            setDisButton(true)
 
             const fd = new FormData();
 
@@ -54,6 +59,9 @@ export function QcReportPushForm({setQcDataForm, projectId}){
         catch (err){
             console.error(err);
             toastSet(setToast, false, "QC report can't be updated")
+        }
+        finally{
+            setDisButton(false)
         }
     }
 
@@ -130,7 +138,7 @@ export function QcReportPushForm({setQcDataForm, projectId}){
                     </div>
                 </div>
                 <div className={styles.formElem}>
-                    <button onClick={updateQcData}>Submit</button>
+                    <button onClick={updateQcData} disabled={disButton} >{disButton ? <>Processing...</> : <>Submit</>}</button>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}
@@ -155,8 +163,11 @@ export function LibQcReportPushForm({setLibQcDataForm, projectId}){
 
     const [toast, setToast] = useState(null)
 
+    const[disButton, setDisButton] = useState(false)
+
 
     async function updateLibQcData() {
+        
         
         if (!formData.library_method || !formData.library_summary || !formData.library_report
             || !formData.library_data)
@@ -166,6 +177,8 @@ export function LibQcReportPushForm({setLibQcDataForm, projectId}){
             }
 
         try {
+
+            setDisButton(true)
 
             const formd = new FormData()
 
@@ -190,6 +203,9 @@ export function LibQcReportPushForm({setLibQcDataForm, projectId}){
         catch(error){
             console.log(error)
             toastSet(setToast, false, "Library QC report can't be updated")
+        }
+        finally{
+            setDisButton(false)
         }
         
     }
@@ -241,7 +257,7 @@ export function LibQcReportPushForm({setLibQcDataForm, projectId}){
                         </div>
                     </div>    
                     <div className={styles.formElem}>
-                        <button onClick={updateLibQcData}>Submit</button>
+                        <button onClick={updateLibQcData} disabled={disButton} >{disButton ? <>Processing...</> : <>Submit</>}</button>
                     </div>  
                 </div>
             </div>
@@ -266,6 +282,8 @@ export function BinfReportPushForm({setBinfDataForm, projectId}){
         "bioinformatics_report" : null
     })
 
+    const[disButton, setDisButton] = useState(false)
+
     async function updateBinfData() {
 
         if(!formData.bioinformatics_summary || !formData.estimated_hours || !formData.approximate_hours || !formData.bioinformatics_report)            
@@ -274,6 +292,9 @@ export function BinfReportPushForm({setBinfDataForm, projectId}){
                 return
             }
         try {
+
+            setDisButton(true)
+
             const binff = new FormData()
 
             Object.entries(formData).forEach(([key, value]) =>{
@@ -298,6 +319,9 @@ export function BinfReportPushForm({setBinfDataForm, projectId}){
         catch(error){
             console.log(error)
             alert("Analysis report can't be updated")
+        }
+        finally{
+            setDisButton(false)
         }
     }
 
@@ -346,7 +370,7 @@ export function BinfReportPushForm({setBinfDataForm, projectId}){
                     <input name="bioinformatics_report" type='file' accept='.pdf' onChange={handleFileChange}/>
                 </div>
                 <div className={styles.formElem}>
-                    <button onClick={updateBinfData} >Submit</button>
+                    <button onClick={updateBinfData} disabled={disButton} >{disButton ? <>Processing...</> : <>Submit</>}</button>
                 </div>  
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}

@@ -22,7 +22,7 @@
     background-color: black;
     border: none;
     border-radius: 20px;
-    height: 200px;
+    height: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +52,7 @@
 .ProjectSide {
     background-color: rgb(226, 226, 226);
     border-radius: 15px;
-    height: 200px;
+    height: 175px;
     display: flex;
     justify-content: center;
     align-items: center;

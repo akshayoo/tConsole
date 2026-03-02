@@ -234,7 +234,7 @@ export function QcSamDetailsComp({qcDetails, projectId, setQcDetails}) {
                     }}
                 >
                     <iframe
-                    src={`http://localhost:6050${qcDetails.qc_report}`} 
+                    src={`${process.env.NEXT_PUBLIC_TCONSOLE_API_BASE_URL}${qcDetails.qc_report}`}
                     width="100%"
                     height="500px"
                     style={{ border: "none", borderRadius: "6px" }}
@@ -354,7 +354,7 @@ export function LibSamDetailsComp({libqcDetails, projectId, setLibqcDetails}) {
                     }}
                 >
                     <iframe
-                    src={`http://localhost:6050${libqcDetails.library_report}`} 
+                    src={`${process.env.NEXT_PUBLIC_TCONSOLE_API_BASE_URL}${libqcDetails.library_report}`} 
                     width="100%"
                     height="500px"
                     style={{ border: "none", borderRadius: "6px" }}
@@ -449,7 +449,7 @@ export function BiinfoDetailsComp({binfDetails, projectId, setBinfDetails}) {
                     }}
                 >
                     <iframe
-                    src={`http://localhost:6050${binfDetails.bioinformatics_report}`} 
+                    src={`${process.env.NEXT_PUBLIC_TCONSOLE_API_BASE_URL}${binfDetails.bioinformatics_report}`} 
                     width="100%"
                     height="500px"
                     style={{ border: "none", borderRadius: "6px" }}

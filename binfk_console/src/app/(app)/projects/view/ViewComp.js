@@ -57,7 +57,7 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
     useEffect(() => {
         async function ProjectsPipeline() {
             try{
-                const response = await axiosApi.get("http://localhost:6050/project/projects"
+                const response = await axiosApi.get("/project/projects"
                 )
                 const data = await response.data
 
