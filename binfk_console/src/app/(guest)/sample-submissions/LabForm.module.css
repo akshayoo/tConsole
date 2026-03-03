@@ -319,6 +319,14 @@
   color: #1f2937;
 }
 
+.DispUpbtn a:hover {
+  padding: 4px;
+  margin-top: 10px;
+  font-size: 12px;
+  border: none;
+  color: #0047b3;
+}
+
 .DispUpbtn button:hover {
   background-color: #7abcff;
   border-color: #9fa0a1;

@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: flex-end;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    background-image: url("/beautiful-mountains-landscape.jpg");
+    background-image: url("/fht1.jpg");
     background-size: cover;
     padding-right: 120px;
     box-sizing: border-box;
@@ -14,7 +14,7 @@
 
 .loginCard {
     width: 380px;
-    background: #0b1220db;
+    background: #141414d0;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);

@@ -276,7 +276,7 @@ function DisplayTable({fileIn, fileUpload, tablePopulate, sendNcounterForm, butt
                 </div>
                 <div className= {styles.DispUpbtn}>
                     <a href="/sample-submission-templates/template.ncounter.csv" download>
-                        Download Template
+                        Download template
                     </a>
                     <label id='fileupload'>Select the file</label>
                     <input onChange={fileIn} htmlFor='fileupload' type='file' accept='.csv, .xlsx' />

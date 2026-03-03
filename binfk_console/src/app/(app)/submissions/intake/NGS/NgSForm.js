@@ -356,7 +356,7 @@ function DisplayTable({ fileIn, fileUpload, tablePopulate, submitNGSForm, button
                     </table>
                 </div>
                 <div className= {styles.DispUpbtn}>
-                    <a href='/sample-submission-templates/template.ngs.csv' download>Download Template</a>
+                    <a href='/sample-submission-templates/template.ngs.csv' download>Download template</a>
                     <label htmlFor='fileupload'>Select the file</label>
                     <input onChange={fileIn} id='fileupload' type='file' accept='.csv, .xlsx' />
                     <button onClick={fileUpload}>Upload File</button>
