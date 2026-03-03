@@ -155,7 +155,8 @@ export function ChatWin() {
                 <ChatBar inference={inference} conversation={conversation} 
                 handleQueryChange={handleQueryChange} sendQuery={sendQuery}
                 query={query} />
-                <MessageComp condition={toast.condition} message={toast.message} />
+
+                {toast && <MessageComp condition={toast.condition} message={toast.message} />}
             </div>
         </>
 
