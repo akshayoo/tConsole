@@ -309,13 +309,7 @@ async def samsub_pop(payload : ProjId, _ : dict = Depends(parse_token)):
 
 
 @router.post("/projcommupdate")
-async def update_comments(payload :  ProjComments, usertok : dict=Depends(parse_token)):
-
-    if usertok["role"] == "bd":
-        return{
-            "status" : False,
-            "message" : "No permission"
-        }
+async def update_comments(payload :  ProjComments, _ : dict=Depends(parse_token)):
 
     collection = collections_load("tcProjects")
 

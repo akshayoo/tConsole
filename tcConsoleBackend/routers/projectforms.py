@@ -421,7 +421,7 @@ def close_project(payload: ProjId, usertok : dict = Depends(parse_token)):
 @router.post("/deleteproject")
 async def delete_project(payload : ProjId, usertok : dict = Depends(parse_token)):
 
-    if usertok["role"] == "analysis" or usertok["role"] == "projects" :
+    if usertok["role"] == "analysis" or usertok["role"] == "projects" or usertok["role"] == "bd" :
         return{
             "status" : False,
             "message" : "No permission"

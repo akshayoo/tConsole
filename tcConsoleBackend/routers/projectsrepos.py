@@ -14,13 +14,7 @@ router = APIRouter(prefix= "/reports")
 
 
 @router.post("/genqcreportpdf")
-async def gen_qcreport(payload : ProjId, usertok : dict = Depends(parse_token)):
-
-    if usertok["role"] == "bd":
-        return{
-            "status" : False,
-            "message" : "No permission"
-        }
+async def gen_qcreport(payload : ProjId, _ : dict = Depends(parse_token)):
     
     project_id = payload.project_id.strip()
 
@@ -43,13 +37,8 @@ async def gen_qcreport(payload : ProjId, usertok : dict = Depends(parse_token)):
 
 
 @router.post("/genlibqcreportpdf")
-async def lib_qcgen(payload : ProjId, usertok : dict = Depends(parse_token)):
+async def lib_qcgen(payload : ProjId, _ : dict = Depends(parse_token)):
 
-    if usertok["role"] == "bd":
-        return{
-            "status" : False,
-            "message" : "No permission"
-        }
 
     project_id = payload.project_id
 
@@ -70,13 +59,7 @@ async def lib_qcgen(payload : ProjId, usertok : dict = Depends(parse_token)):
     
 
 @router.post("/genfinreportpdf")
-async def fin_report_gen(payload : ProjId, usertok : dict = Depends(parse_token)):
-
-    if usertok["role"] == "bd":
-        return{
-            "status" : False,
-            "message" : "No permission"
-        }
+async def fin_report_gen(payload : ProjId, _ : dict = Depends(parse_token)):
 
     project_id = payload.project_id
 
@@ -112,13 +95,7 @@ async def fin_report_gen(payload : ProjId, usertok : dict = Depends(parse_token)
 
 @router.post("/samplesubreportpdf")
 
-async def samsub_gen(payload : ProjId, usertok : dict = Depends(parse_token)):
-
-    if usertok["role"] == "bd":
-        return{
-            "status" : False,
-            "message" : "No permission"
-        } 
+async def samsub_gen(payload : ProjId, _ : dict = Depends(parse_token)):
 
     collections = collections_load("tcProjects")
 
