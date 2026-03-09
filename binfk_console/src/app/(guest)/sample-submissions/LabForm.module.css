@@ -398,3 +398,127 @@
     100% {transform:translate(0.15px)}
 }
      
+@media (max-width: 1280px) {
+
+  .projDetSide {
+    width: 380px;
+    padding: 30px 20px;
+  }
+
+  .FormFirSec {
+    width: 480px;
+  }
+}
+
+
+@media (max-width: 1024px) {
+
+  .ProgCompDiv {
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  .projDetSide {
+    width: 100%;
+    padding: 15px;
+    overflow: visible;
+  }
+
+  .SideFDiv {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .SideSDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .SideInnerComp {
+    margin: 0;
+  }
+
+  .MainFormPage {
+    width: 100%;
+  }
+
+  .FormBox {
+    flex-direction: column;
+    overflow-y: auto;
+    margin: 0;
+  }
+
+  .FormFirSec {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgb(236, 236, 236);
+    margin-top: 20px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    overflow-y: visible;
+  }
+
+  .FormSceSec {
+    overflow-y: visible;
+    height: auto;
+    padding: 15px;
+  }
+
+  .FormTableSec {
+    height: auto;
+  }
+
+  .DisplayTable {
+    height: auto;
+  }
+
+  .TableDiv {
+    height: 350px;
+  }
+
+  .ButtonSec {
+    height: auto;
+  }
+
+  .FFComp {
+    grid-template-columns: 1fr 1.5fr;
+    padding: 12px;
+  }
+}
+
+
+@media (max-width: 900px) {
+
+  .projDetSide {
+    padding: 12px;
+  }
+
+  .SideSDiv {
+    grid-template-columns: 1fr;
+  }
+
+  .FFComp {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .FFComp input,
+  .FFComp select,
+  .FFComp textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .FRad label:not(:first-child) {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+
+  .DispTab thead th,
+  .DispTab tbody td {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+}
