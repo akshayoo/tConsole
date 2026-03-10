@@ -39,7 +39,7 @@ export function NavBar() {
 function Logo() {
     return (
         <Image
-            src="https://theracues.com/images/logo.png"
+            src="/logo.webp"
             alt="Theracues logo"
             width={120}
             height={60}
