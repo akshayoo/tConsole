@@ -329,7 +329,7 @@ function DisplayTable({ fileIn, fileUpload, tablePopulate, submitNGSForm, button
                             <tr>
                                 <th >Sample ID</th>
                                 <th>Description</th>
-                                <th>RNA Conc.</th>
+                                <th>Conc.</th>
                                 <th>Notes</th>
                                 <th>{"Replicate(Group Name)"}</th>
                             </tr>
@@ -348,7 +348,15 @@ function DisplayTable({ fileIn, fileUpload, tablePopulate, submitNGSForm, button
                             ) : (
                                 <tr>
                                     <td colSpan="5" style={{ textAlign: "center" }}>
-                                        NO DATA
+                                        NO DATA TO DISPLAY PLEASE UPLOAD ONE
+                                        <ul style={{textAlign: "left"}} >
+                                            <li>Download the template (.csv)</li>
+                                            <li>Fill in the sample details in the template</li>
+                                            <li>Leave any columns or cells blank if the information is not available</li>
+                                            <li>Save the completed sample submission table as a .csv file</li>
+                                            <li>Select the file and click "Upload"</li>
+                                            <li><em>Please use only the provided template (.csv) to enter the data. Other file formats will not be accepted.</em></li>
+                                        </ul>
                                     </td>
                                 </tr>
                             )}
@@ -357,8 +365,8 @@ function DisplayTable({ fileIn, fileUpload, tablePopulate, submitNGSForm, button
                 </div>
                 <div className= {styles.DispUpbtn}>
                     <a href='/sample-submission-templates/template.ngs.csv' download>Download template</a>
-                    <label htmlFor='fileupload'>Select the file</label>
-                    <input onChange={fileIn} id='fileupload' type='file' accept='.csv, .xlsx' />
+                    <label htmlFor='fileupload'>&#8658;  Select the file</label>
+                    <input onChange={fileIn} id='fileupload' type='file' accept='.csv' />
                     <button onClick={fileUpload}>Upload File</button>
                 </div>
                 <SendButton submitNGSForm={submitNGSForm} buttonDisable={buttonDisable} />

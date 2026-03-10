@@ -267,7 +267,15 @@ function DisplayTable({fileIn, fileUpload, tablePopulate, sendNcounterForm, butt
                             ) : (
                                 <tr>
                                     <td colSpan="5" style={{ textAlign: "center" }}>
-                                        NO DATA
+                                        NO DATA TO DISPLAY PLEASE UPLOAD ONE
+                                        <ul>
+                                            <li>Download the template (.csv)</li>
+                                            <li>Fill in the sample details in the template</li>
+                                            <li>Leave any columns or cells blank if the information is not available</li>
+                                            <li>Save the completed sample submission table as a .csv file</li>
+                                            <li>Select the file and click "Upload"</li>
+                                            <li><em>Please use only the provided template (.csv) to enter the data. Other file formats will not be accepted.</em></li>
+                                        </ul>
                                     </td>
                                 </tr>
                             )}
@@ -276,7 +284,7 @@ function DisplayTable({fileIn, fileUpload, tablePopulate, sendNcounterForm, butt
                 </div>
                 <div className= {styles.DispUpbtn}>
                     <a href='/sample-submission-templates/template.ngs.csv' download>Download template</a>
-                    <label id='fileupload'>Select the file</label>
+                    <label id='fileupload'>&#8658;  Select the file</label>
                     <input onChange={fileIn} htmlFor='fileupload' type='file' accept='.csv, .xlsx' />
                     <button onClick={fileUpload}>Upload File</button>
                 </div>
