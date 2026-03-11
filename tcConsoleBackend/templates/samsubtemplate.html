@@ -319,7 +319,7 @@
                     <tr>
                         <td>{{ row.sample_id }}</td>
                         <td>{{ row.description }}</td>
-                        <td>{{ "%.2f"|format(row.concentration) }}</td>
+                        <td>{{ "%.2f" | format((row.concentration or 0) | float) }}</td>
                         <td>{{ row.notes }}</td>
                         <td>{{ row.replicate_group }}</td>
                     </tr>

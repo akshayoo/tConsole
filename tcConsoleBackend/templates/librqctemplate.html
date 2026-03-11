@@ -304,7 +304,7 @@
                     <tr>
                         <td>{{ row.sample_id }}</td>
                         <td>{{ row.tcues_sample_id }}</td>
-                        <td>{{ "%.2f"|format(row.nucleic_acid_conc) }}</td>
+                        <td>{{ "%.2f"|format((row.nucleic_acid_conc or 0) | float) }}</td>
                         <td>{{ row.comments }}</td>
                     </tr>
                     {% endfor %}
