@@ -209,7 +209,7 @@ async def send_mail(payload: EmailCont, usertok : dict = Depends(parse_token)):
 
         if section == "analysis":
 
-            if usertok["role"] == "bd" or usertok["role"] == "projects":
+            if usertok["role"] == "bd":
                 return{
                     "status" : False,
                     "message" : "No permission"
