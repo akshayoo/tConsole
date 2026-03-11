@@ -184,7 +184,7 @@ async def form_fetch_mail(payload: ProjectSubmission, usertok : dict = Depends(p
 
         email_status = await email_config(subject= "Project Created Successfully",
                                     to_mail= [payload.email],
-                                    cc_mail= [usertok["username"], "cues@theracues.com"],
+                                    cc_mail= [usertok["username"], "cues@theracues.com", "analysis@theracues.com", "projectmgt@theracues.com"],
                                     mail_html= html_cont)
 
         return {
