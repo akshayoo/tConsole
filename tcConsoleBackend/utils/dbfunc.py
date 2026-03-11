@@ -33,6 +33,25 @@ def collections_load(collection: str):
         )
     
 
+def collections_load_web(collection: str):
+    try:
+        CLIENT = MongoClient(MONGO_CLIENT)
+
+        db = CLIENT.tcWebDB
+        
+        
+        collection_obj = db[collection]
+        
+        return collection_obj
+    
+    except Exception as e:
+        print(f"Database connection error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Database connection failed: {str(e)}"
+        )
+    
+
 def qc_temp_bytes(project_id : str):
 
     collections = collections_load("tcProjects")
