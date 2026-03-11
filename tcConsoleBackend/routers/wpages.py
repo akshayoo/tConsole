@@ -58,7 +58,7 @@ async def brochure_dwnld(
 
             status = await email_config(
                 subject=subject,
-                cc_mail=['akshay.ramesh@theracues.com'],
+                cc_mail=['akshay.ramesh@theracues.com','cues@theracues.com'],
                 to_mail=[email],
                 mail_html=mail_html,
                 attachments=[{
