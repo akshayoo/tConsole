@@ -203,7 +203,7 @@ async def send_mail(payload: EmailCont, usertok : dict = Depends(parse_token)):
         to = [to_email]
         
         if payload.email_cc:
-            cc_mails = [payload.email_cc]
+            cc_mails = [mail.strip() for mail in payload.email_cc.split(",") if mail.strip()]
         else:
             cc_mails = []
 
