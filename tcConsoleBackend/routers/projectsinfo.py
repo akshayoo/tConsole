@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from utils.dbfunc import collections_load
-from schemas.schema import ProjIdStatus, ProjId, TaskUpdate, ProjComments
+from schemas.schema import ProjIdStatus, ProjId, TaskUpdate, ProjComments, TaskAdd
 import os
 from utils.jwt_utils import parse_token
 from fastapi.responses import FileResponse
@@ -586,3 +586,61 @@ def task_update(payload : TaskUpdate, usertok : dict = Depends(parse_token)):
             status_code= 500,
             detail= "Failed to update task"
         )
+    
+
+@router.post("/taskdelete")
+async def delete_task(payload:TaskUpdate, usertok :  dict = Depends(parse_token)):
+
+    if usertok["role"] == "admin":
+        pass
+    else: 
+        return{
+            "status" : False,
+            "message" : "No permission"
+        }
+    
+    collection = collections_load("tcProjects")
+
+    project_id = payload.project_id
+    task_num = payload.task
+    sec  = payload.sec.strip().lower()
+
+    try:
+
+        del_sec = "standard_deliverables" if sec == "std" else "added_deliverables"
+
+        task = collection.update_one({"project_id" : project_id},
+                              {
+                                  "$pull" : {
+                                      f"project_details.{del_sec}": {
+                                          "task_number": task_num
+                                          }
+                                  }
+                              })
+        if task.modified_count == 0:
+            return {"status": False, "message": "Task not found"}
+
+        return{
+            "status" : True,
+            "message" : "Task deleted"
+        }
+    
+    except Exception as e:
+        print(str(e))
+        raise HTTPException(
+            status_code= 500,
+            detail= "Failed to delete task"
+        )
+    
+
+@router.post("/addtask")
+async def add_task(payload : TaskAdd, usertok: dict = Depends(parse_token)):
+    try:
+        pass
+    except Exception as e:
+        print(str(e))
+        raise HTTPException(
+            status_code= 500,
+            detail= "Failed to add the task"
+        )
+    

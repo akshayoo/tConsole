@@ -90,6 +90,10 @@ class TaskUpdate(BaseModel):
     task : int
     sec : str
 
+class TaskAdd(BaseModel):
+    project_id : str
+    project_task : str
+
 class AuthLogin(BaseModel):
     username : str
     password : str

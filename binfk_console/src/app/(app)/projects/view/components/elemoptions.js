@@ -403,7 +403,7 @@ export function ProjectCommentsForm({projectId, setProjectComments}){
         }
 
         if(formData.project_comments.length > 500){
-            toastSet(setToast, false, "Exceeded charecter limit make the comments short")
+            toastSet(setToast, false, "Exceeded character limit make the comments short")
             return
         }
 
@@ -446,4 +446,72 @@ export function ProjectCommentsForm({projectId, setProjectComments}){
             </div>
         </div>
     );
+}
+
+
+export function AddTask({projectId, setTaskAdd}){
+
+    const [toast, setToast] = useState(null)
+
+    const [formData, setFormData] = useState({
+        "project_id" : projectId,
+        "project_task" : ""
+    })
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setFormData(prev => ({
+            ...prev, [name] : value
+        }))
+    }
+
+    async function updateProjectComments() {
+        if(!formData.project_comments){
+            toastSet(setToast, false, "Missing fields")
+            return
+        }
+
+        if(formData.project_comments.length > 200){
+            toastSet(setToast, false, "Exceeded character counts >> Keep it under 200 chars")
+            return
+        }
+
+        try {
+            const response = await axiosApi.post("/project/addtask",
+                formData
+            )
+            
+            const data = response.data
+
+            toastSet(setToast, data.status, data.message)
+            setTimeout(() => setTaskAdd(false), 2000)
+
+        }
+        catch(err){
+            console.log(err)
+            toastSet(setToast, false, "Failed to add task")
+        }
+    }
+
+    return(
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+                <div className={styles.modalHeader}>
+                    <h3>Add a task for {projectId}</h3>
+                    <button onClick={() => setTaskAdd(false)} >X</button>
+                </div>
+
+                <div className={styles.modalBody}>
+                    <div className={styles.formElem}>
+                        <label>Task Name</label>
+                        <textarea name="project_task" placeholder='Maximum 200 charecters' rows='6' onChange={handleChange}/>
+                    </div>
+                    <div className={styles.formElem}>
+                        <button onClick={updateProjectComments} >Submit</button>
+                    </div>  
+                </div>
+                {toast && <MessageComp condition={toast.condition} message={toast.message} />}
+            </div>
+        </div>     
+    )
 }

@@ -473,8 +473,6 @@
 
     background-color: white;
     color: #414141;
-
-    margin-left: auto;
     margin-right: 6px;
 
     cursor: pointer;
@@ -505,6 +503,60 @@
 }
 
 .TrueBtn:disabled:hover {
+    background-color: #f5f5f5;
+    color: #b5b5b5;
+    box-shadow: none;
+    transform: none;
+}
+
+.DelBtn {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 50%;
+    border: 2px solid #bdbdbd;
+
+    background-color: white;
+    color: #414141;
+
+    margin-left: auto;
+    margin-right: 5px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.DelBtn:hover {
+    background-color: #d11800;
+    color: white;
+    box-shadow: 0 4px 10px rgba(209, 136, 0, 0.3);
+    transform: translateY(-0.5px);
+}
+
+.DelBtn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(209, 59, 0, 0.3);
+}
+
+.DelBtn:disabled {
+    border: 2px solid #df3400;
+    color: #b5b5b5;
+    background-color: #f5f5f5;
+
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.DelBtn:disabled:hover {
     background-color: #f5f5f5;
     color: #b5b5b5;
     box-shadow: none;

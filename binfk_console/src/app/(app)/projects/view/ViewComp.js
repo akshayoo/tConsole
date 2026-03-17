@@ -4,7 +4,7 @@ import styles from './ViewComp.module.css'
 import { useState, useEffect } from 'react';
 import axiosApi from '@/lib/api';
 import { SampleSubDetailsComp, QcSamDetailsComp, LibSamDetailsComp, BiinfoDetailsComp } from './components/elements';
-import { QcReportPushForm, LibQcReportPushForm, BinfReportPushForm, ProjectCommentsForm } from './components/elemoptions';
+import { QcReportPushForm, LibQcReportPushForm, BinfReportPushForm, ProjectCommentsForm, AddTask } from './components/elemoptions';
 import { EmailReports } from './components/elementsent';
 import { MessageComp } from '@/components/messageComp';
 import { toastSet } from '@/components/toastfunc';
@@ -254,6 +254,8 @@ function StatusPop({projectCont}){
 
     const [toast, setToast] = useState(null)
 
+    const [taskAdd, setTaskAdd] = useState(false)
+
     async function updateTaskstage(sec, projectId, task){
 
         try {
@@ -309,6 +311,50 @@ function StatusPop({projectCont}){
 
     }
 
+    async function deleteTask(sec, projectId, task){
+
+        try{
+            const response = await axiosApi.post("/project/taskdelete",
+                {
+                    "project_id" : projectId,
+                    "task" : task,
+                    "sec" : sec 
+                }
+            )
+
+            const data = response.data
+            toastSet(setToast, data.status, data.message)
+            return
+
+        }
+        catch(er){
+            console.log(er)
+            toastSet(setToast, false, "Error deleting the task")
+        }
+    }
+
+    async function addTask(sec, projectId, task){
+
+        try{
+            const response = await axiosApi.post("/project/taskadd",
+                {
+                    "project_id" : projectId,
+                    "task" : task,
+                    "sec" : sec 
+                }
+            )
+
+            const data = response.data
+            toastSet(setToast, data.status, data.message)
+            return
+
+        }
+        catch(er){
+            console.log(er)
+            toastSet(setToast, false, "Error adding task")
+        }
+    }
+
     return(
 
         <div className={styles.ProjectComp}>
@@ -319,10 +365,14 @@ function StatusPop({projectCont}){
             <div >
                 <div className={styles.TaskProp}>
                     <div>Standard Tasks</div>
+                    <div className={styles.AddTaskBtn}>
+                        <button onClick={() => setTaskAdd(true)}>&#10011;</button>
+                    </div> 
                     {projectCont.std_del.map((stdDel) => {
                         return(
                             <div key={stdDel.task_number} className={styles.TaskComp}>
                                 <div>{stdDel.label}</div>
+                                <button onClick={() => deleteTask("std", projectCont.project_id, stdDel.task_number)} className={styles.DelBtn} disabled={stdDel.completed}>&#10005;</button>
                                 <button onClick={() => updateTaskstage("std", projectCont.project_id, stdDel.task_number)} className={styles.TrueBtn} disabled={stdDel.completed}>&#10004;</button>
                             </div>
                         );
@@ -330,15 +380,22 @@ function StatusPop({projectCont}){
                 </div>
                 <div className={styles.TaskProp}>
                     <div>Added Tasks</div>
+                    <div className={styles.AddTaskBtn}>
+                        <button onClick={() => setTaskAdd(true)}>&#10011;</button>
+                    </div> 
                     {projectCont.add_del.map((addDel) => {
                         return(
-                            <div key={addDel.task_number} className={styles.TaskComp}>
-                                <div>{addDel.label}</div>
-                                <button onClick={() => updateTaskstage("adel", projectCont.project_id, addDel.task_number)} className={styles.TrueBtn} disabled={addDel.completed}>&#10004;</button>
-                            </div>
+                            <>
+                                <div key={addDel.task_number} className={styles.TaskComp}>
+                                    <div>{addDel.label}</div>
+                                    <button onClick={() => deleteTask("adel", projectCont.project_id, stdDel.task_number)} className={styles.DelBtn} disabled={addDel.completed}>&#10005;</button>
+                                    <button onClick={() => updateTaskstage("adel", projectCont.project_id, addDel.task_number)} className={styles.TrueBtn} disabled={addDel.completed}>&#10004;</button>
+                                </div>                          
+                            </>
                         );
-                    })}             
-                </div>
+                    })}         
+                </div> 
+                {taskAdd && <AddTask projectId={projectCont.project_id} setTaskAdd={setTaskAdd}/>} 
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message}/>}
         </div>
@@ -496,7 +553,7 @@ function QcSamDetails({projectCont, qcDetails, setQcDetails}) {
                     {qcDataForm && <QcReportPushForm projectId={projectCont.project_id} setQcDataForm={setQcDataForm}/>}
                 </div>
                 <div className={styles.ProjecInOnBtn}>
-                    <a href='/sample-submission-templates/lib_qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
+                    <a href='/sample-submission-templates/qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}
@@ -552,7 +609,7 @@ function LibSamDetails({projectCont, libqcDetails, setLibqcDetails}) {
                     {libQcDataFrom && <LibQcReportPushForm projectId={projectCont.project_id} setLibQcDataForm ={setLibQcDataForm} />}
                 </div>
                 <div className={styles.ProjecInOnBtn}>
-                    <a href='/sample-submission-templates/qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
+                    <a href='/sample-submission-templates/lib_qc_template.csv' download><button className={styles.ProjecInBtn} >{`Download Template (.csv)`}</button></a>
                 </div>
             </div>
             {toast && <MessageComp condition={toast.condition} message={toast.message} />}
