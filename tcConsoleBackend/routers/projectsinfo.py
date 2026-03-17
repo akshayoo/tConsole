@@ -259,12 +259,14 @@ async def samsub_pop(payload : ProjId, _ : dict = Depends(parse_token)):
                 "message" : "No sample submission form found. Please contact the client"
             }
         
-        def true_false(bool):
-            if bool is True:
+        def true_false(val):
+            if val == "" or val == " " or val is None:
+                return "No data available"
+            if val is True or (isinstance(val, str) and val.lower() == "yes"):
                 return "Yes"
-            elif bool is False:
+            elif val is False or (isinstance(val, str) and val.lower() == "no"):
                 return "No"
-            return bool
+            return val
         
         def null_val(val):
             if val == "" or val == " " or val is None:
@@ -570,7 +572,7 @@ def task_update(payload : TaskUpdate, usertok : dict = Depends(parse_token)):
                                     f"project_details.{del_sec}.$[elem].completed_at" : datetime.now(),
                                     f"project_details.{del_sec}.$[elem].updated_user" : usertok["name"],
                                     f"project_details.{del_sec}.$[elem].user_id" : usertok["user_id"],
-                                    f"project_details.{del_sec}.$[elem].user_name" : usertok["username"]
+                                    f"project_details.{del_sec}.$[elem].username" : usertok["username"]
                                 },
                                 
                             }, array_filters=[{"elem.task_number": task_num}])
@@ -635,8 +637,48 @@ async def delete_task(payload:TaskUpdate, usertok :  dict = Depends(parse_token)
 
 @router.post("/addtask")
 async def add_task(payload : TaskAdd, usertok: dict = Depends(parse_token)):
-    try:
+    if usertok["role"] == "admin" or usertok["role"] == "analysis":
         pass
+    else: 
+        return{
+            "status" : False,
+            "message" : "No permission"
+        }
+    
+    collection = collections_load("tcProjects")
+    project_id = payload.project_id
+
+    try:
+
+        project_data = collection.find_one({"project_id": project_id})
+
+        all_deliverables = project_data.get("project_details", {}).get("added_deliverables", [])
+
+        last_task_number = max(
+            (d["task_number"] for d in all_deliverables), default=-1
+        )
+        new_task_number = last_task_number + 1
+
+        new_task = {
+            "label": payload.project_task,         
+            "task_number": new_task_number,
+            "completed": False,
+            "completed_at": None,
+            "updated_user": None,
+            "user_id": None,
+            "username": None
+        }
+
+        collection.update_one(
+            {"project_id": project_id},
+            {"$push": {"project_details.added_deliverables": new_task}}
+        )
+
+        return {
+            "status": True,
+            "message": "Task added successfully"
+        }
+
     except Exception as e:
         print(str(e))
         raise HTTPException(

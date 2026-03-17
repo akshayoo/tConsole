@@ -365,9 +365,6 @@ function StatusPop({projectCont}){
             <div >
                 <div className={styles.TaskProp}>
                     <div>Standard Tasks</div>
-                    <div className={styles.AddTaskBtn}>
-                        <button onClick={() => setTaskAdd(true)}>&#10011;</button>
-                    </div> 
                     {projectCont.std_del.map((stdDel) => {
                         return(
                             <div key={stdDel.task_number} className={styles.TaskComp}>

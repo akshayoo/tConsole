@@ -145,20 +145,20 @@ export function NcounterForm({projectId}) {
                     <div className={styles.FFComp}>
                         <div>Are there Replicates</div>
                         <div className={styles.FRad}>
-                            <input type="radio" id="rep-yes" name="replicates" value="yes" onChange={handleRadiooptChange}  />
+                            <input type="radio" id="rep-yes" name="replicates" value="Yes" onChange={handleRadiooptChange}  />
                             <label htmlFor="rep-yes">Yes</label>
 
-                            <input type="radio" id="rep-no" name="replicates" value="no" onChange={handleRadiooptChange}  />
+                            <input type="radio" id="rep-no" name="replicates" value="No" onChange={handleRadiooptChange}  />
                             <label htmlFor="rep-no">No</label>
                         </div>
                     </div>
                     <div className={styles.FFComp}>
                         <div>Extraction needed</div>
                         <div className={styles.FRad}>
-                            <input type="radio" id="ext-yes" name="extraction_needed" value="yes" onChange={(e) => {setExtChange(false); handleRadiooptChange(e)}} />
+                            <input type="radio" id="ext-yes" name="extraction_needed" value="Yes" onChange={(e) => {setExtChange(false); handleRadiooptChange(e)}} />
                             <label htmlFor="ext-yes">Yes</label>
 
-                            <input type="radio" id="ext-no" name="extraction_needed" value="no" onChange={(e) => {setExtChange(true); handleRadiooptChange(e)}}/>
+                            <input type="radio" id="ext-no" name="extraction_needed" value="No" onChange={(e) => {setExtChange(true); handleRadiooptChange(e)}}/>
                             <label htmlFor="ext-no">No</label>
                         </div>
                     </div>
@@ -202,20 +202,20 @@ function ExtCont({handleFieldChange, handleRadiooptChange}) {
             <div className={styles.FFComp}>
                 <div>Has Total RNA prep been used</div>
                 <div className={styles.FRad}>
-                    <input type="radio" id="rnaprep-yes" name="rna_prep" value="yes" onChange={handleRadiooptChange} />
+                    <input type="radio" id="rnaprep-yes" name="rna_prep" value="Yes" onChange={handleRadiooptChange} />
                     <label htmlFor="rnaprep-yes">Yes</label>
 
-                    <input type="radio" id="rnaprep-no" name="rna_prep" value="no" onChange={handleRadiooptChange} />
+                    <input type="radio" id="rnaprep-no" name="rna_prep" value="No" onChange={handleRadiooptChange} />
                     <label htmlFor="rnaprep-no">No</label>
                 </div>
             </div>
             <div className={styles.FFComp}>
                 <div>Has sample been treated with DNAase</div>
                 <div className={styles.FRad}>
-                    <input type="radio" id="dnaase-yes" name="dnase_treated" value="yes" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-yes" name="dnase_treated" value="Yes" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-yes">Yes</label>
 
-                    <input type="radio" id="dnaase-no" name="dnase_treated" value="no" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-no" name="dnase_treated" value="No" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-no">No</label>
                 </div>
             </div>

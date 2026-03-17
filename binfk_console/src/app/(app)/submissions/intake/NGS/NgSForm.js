@@ -243,10 +243,10 @@ function ExtTrue({setExtNeeded, handleRadiooptChange}){
             <div className={styles.FFComp}>
                 <div>Extrection needed</div>
                 <div className={styles.FRad}>
-                    <input type="radio" id="ext-yes" name="extraction_needed" value="yes" onChange={(e) => {setExtNeeded(false); handleRadiooptChange(e)}} />
+                    <input type="radio" id="ext-yes" name="extraction_needed" value="Yes" onChange={(e) => {setExtNeeded(false); handleRadiooptChange(e)}} />
                     <label htmlFor="ext-yes">Yes</label>
 
-                    <input type="radio" id="ext-no" name="extraction_needed" value="no" onChange={(e) => {setExtNeeded(true); handleRadiooptChange(e)}} />
+                    <input type="radio" id="ext-no" name="extraction_needed" value="No" onChange={(e) => {setExtNeeded(true); handleRadiooptChange(e)}} />
                     <label htmlFor="ext-no">No</label>
                 </div>
             </div>
@@ -260,10 +260,10 @@ function RnaExtTrue({handleFieldChange, handleRadiooptChange}){
             <div className={styles.FFComp}>
                 <div>Has sample been treated with DNAase</div>
                 <div className={styles.FRad}>
-                    <input type="radio" id="dnaase-yes" name="dnase_treated" value="yes" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-yes" name="dnase_treated" value="Yes" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-yes">Yes</label>
 
-                    <input type="radio" id="dnaase-no" name="dnase_treated" value="no" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-no" name="dnase_treated" value="No" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-no">No</label>
                 </div>
             </div>
@@ -292,10 +292,10 @@ function DnaExtTrue({handleFieldChange, handleRadiooptChange}){
             <div className={styles.FFComp}>
                 <div>Has sample been treated with RNAase</div>
                 <div className={styles.FRad}>
-                    <input type="radio" id="dnaase-yes" name="rnase_treated" value="yes" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-yes" name="rnase_treated" value="Yes" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-yes">Yes</label>
 
-                    <input type="radio" id="dnaase-no" name="rnase_treated" value="no" onChange={handleRadiooptChange} />
+                    <input type="radio" id="dnaase-no" name="rnase_treated" value="No" onChange={handleRadiooptChange} />
                     <label htmlFor="dnaase-no">No</label>
                 </div>
             </div>
