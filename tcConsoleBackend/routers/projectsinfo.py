@@ -593,7 +593,7 @@ def task_update(payload : TaskUpdate, usertok : dict = Depends(parse_token)):
 @router.post("/taskdelete")
 async def delete_task(payload:TaskUpdate, usertok :  dict = Depends(parse_token)):
 
-    if usertok["role"] == "admin":
+    if usertok["role"] == "admin" or usertok["role"] == "analysis":
         pass
     else: 
         return{

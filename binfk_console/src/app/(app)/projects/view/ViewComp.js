@@ -313,6 +313,12 @@ function StatusPop({projectCont}){
 
     async function deleteTask(sec, projectId, task){
 
+        const confirmAction = window.confirm(
+            "You are going to delete this task, Do you want to proceed"
+        )
+
+        if (!confirmAction) return
+
         try{
             const response = await axiosApi.post("/project/taskdelete",
                 {
@@ -333,28 +339,6 @@ function StatusPop({projectCont}){
         }
     }
 
-    async function addTask(sec, projectId, task){
-
-        try{
-            const response = await axiosApi.post("/project/taskadd",
-                {
-                    "project_id" : projectId,
-                    "task" : task,
-                    "sec" : sec 
-                }
-            )
-
-            const data = response.data
-            toastSet(setToast, data.status, data.message)
-            return
-
-        }
-        catch(er){
-            console.log(er)
-            toastSet(setToast, false, "Error adding task")
-        }
-    }
-
     return(
 
         <div className={styles.ProjectComp}>
@@ -369,7 +353,7 @@ function StatusPop({projectCont}){
                         return(
                             <div key={stdDel.task_number} className={styles.TaskComp}>
                                 <div>{stdDel.label}</div>
-                                <button onClick={() => deleteTask("std", projectCont.project_id, stdDel.task_number)} className={styles.DelBtn} disabled={stdDel.completed}>&#10005;</button>
+                                <button onClick={() => deleteTask("std", projectCont.project_id, stdDel.task_number)} className={styles.DelBtn} disabled={stdDel.completed}>&#128465;</button>
                                 <button onClick={() => updateTaskstage("std", projectCont.project_id, stdDel.task_number)} className={styles.TrueBtn} disabled={stdDel.completed}>&#10004;</button>
                             </div>
                         );
@@ -385,7 +369,7 @@ function StatusPop({projectCont}){
                             <>
                                 <div key={addDel.task_number} className={styles.TaskComp}>
                                     <div>{addDel.label}</div>
-                                    <button onClick={() => deleteTask("adel", projectCont.project_id, stdDel.task_number)} className={styles.DelBtn} disabled={addDel.completed}>&#10005;</button>
+                                    <button onClick={() => deleteTask("adel", projectCont.project_id, addDel.task_number)} className={styles.DelBtn} disabled={addDel.completed}>&#128465;</button>
                                     <button onClick={() => updateTaskstage("adel", projectCont.project_id, addDel.task_number)} className={styles.TrueBtn} disabled={addDel.completed}>&#10004;</button>
                                 </div>                          
                             </>

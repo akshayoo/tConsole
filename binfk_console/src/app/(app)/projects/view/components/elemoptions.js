@@ -438,6 +438,9 @@ export function ProjectCommentsForm({projectId, setProjectComments}){
                         <label>Update comment</label>
                         <textarea name="project_comments" placeholder='Maximum 500 charecters' rows='12' onChange={handleChange}/>
                     </div>
+                    <div style={{ textAlign: "right", fontSize: "13px" }}>
+                        {formData.project_comments.length}/500
+                    </div>
                     <div className={styles.formElem}>
                         <button onClick={updateProjectComments} >Submit</button>
                     </div>  
@@ -458,6 +461,8 @@ export function AddTask({projectId, setTaskAdd}){
         "project_task" : ""
     })
 
+    const [disBtn, setDisBtn] = useState(false)
+
     const handleChange = (e) => {
         const {name, value} = e.target
         setFormData(prev => ({
@@ -465,16 +470,18 @@ export function AddTask({projectId, setTaskAdd}){
         }))
     }
 
-    async function updateProjectComments() {
-        if(!formData.project_comments){
+    async function addNewTask() {
+        if(!formData.project_task.trim()){
             toastSet(setToast, false, "Missing fields")
             return
         }
 
-        if(formData.project_comments.length > 200){
+        if(formData.project_task.length > 200){
             toastSet(setToast, false, "Exceeded character counts >> Keep it under 200 chars")
             return
         }
+
+        setDisBtn(true)
 
         try {
             const response = await axiosApi.post("/project/addtask",
@@ -491,6 +498,10 @@ export function AddTask({projectId, setTaskAdd}){
             console.log(err)
             toastSet(setToast, false, "Failed to add task")
         }
+
+        finally{
+            setDisBtn(false)
+        }
     }
 
     return(
@@ -506,8 +517,11 @@ export function AddTask({projectId, setTaskAdd}){
                         <label>Task Name</label>
                         <textarea name="project_task" placeholder='Maximum 200 charecters' rows='6' onChange={handleChange}/>
                     </div>
+                    <div style={{ textAlign: "right", fontSize: "13px" }}>
+                        {formData.project_task.length}/200
+                    </div>
                     <div className={styles.formElem}>
-                        <button onClick={updateProjectComments} >Submit</button>
+                        <button onClick={addNewTask} disabled={disBtn} >{disBtn ? <>Please wait</> : <>Add task</>}</button>
                     </div>  
                 </div>
                 {toast && <MessageComp condition={toast.condition} message={toast.message} />}
