@@ -110,6 +110,7 @@ export function QcReportPushForm({setQcDataForm, projectId}){
                                 <option value="">Select</option>
                                 <option value="Quibit">Qubit</option>
                                 <option value="NanoDrop">NanoDrop</option>
+                                <option value="NanoDrop">NanoDrop & Qubit</option>
                             </select>
                         </div>
                         <div className={styles.formElemel}>

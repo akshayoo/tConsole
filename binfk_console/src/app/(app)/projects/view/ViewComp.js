@@ -131,7 +131,10 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
     return(
 
         <div className={styles.SideB}>
-            <h2>Projects</h2>
+            <div className={styles.SearchDiv}>
+                <h2>Projects</h2>
+                <input type='search'/>
+            </div>
             <div className={styles.RecEnt}>
                 {
                     projectPipeline.map((project) => {
@@ -194,6 +197,35 @@ function ViewProjDetails({projectCont}) {
 
     const [projectComments, setProjectComments] = useState(false)
 
+    async function editProjectDetails(meta, projId){
+
+        try{
+
+            const response = await axiosApi.post("/project/editreq",
+                {
+                    project_id : projId,
+                    meta : meta
+                }
+            )
+
+            const data = await response.data
+
+            if(!data.status){
+                toastSet(setToast, false, data.message)
+                return
+            }
+
+            toastSet(setToast, true, data.message)
+            return
+
+
+        }
+        catch(err){
+            console.log(err)
+            toastSet(setToast, false, "Error editing the details")
+        }
+    }
+
     return(
         <>
             <div className={styles.ProjectSection}>
@@ -215,7 +247,10 @@ function ViewProjDetails({projectCont}) {
             </div>
 
             <div className={styles.ProjectComp}>
-                <h2 className={styles.sech}>Client Information</h2>
+                <div className={styles.sechDiv} >
+                    <h2 className={styles.sech}>Client Information</h2>
+                    <button onClick={() => editProjectDetails("project_info", projectCont.project_id)}>&#9998;</button>
+                </div>
                 <div className={styles.GridTwo}>
                     <div className={styles.ProjecIn}>
                         <div>PI Name</div>
@@ -464,7 +499,10 @@ function SampleSubDetails({projectCont, samsubDetails, setSamsubDetails}){
     return(
         <div className={styles.ProjectComp}>
             <div className={styles.HeadComp}>
-                <h2 className={styles.sech}>Sample Submission Details</h2>
+                <div className={styles.sechDiv} >
+                    <h2 className={styles.sech}>Sample Submission Details</h2>
+                    <button>&#9998;</button>
+                </div>
                 <button className={styles.fieldPop} onClick={() => SampleSub(projectCont.project_id)}>&#8693;</button>
                 {toast && <MessageComp condition={toast.condition} message={toast.message} />}
             </div>
@@ -520,7 +558,10 @@ function QcSamDetails({projectCont, qcDetails, setQcDetails}) {
     return(
         <div className={styles.ProjectComp}>
             <div className={styles.HeadComp}>
-                <h2 className={styles.sech}>QC Details</h2>
+                <div className={styles.sechDiv} >
+                    <h2 className={styles.sech}>QC Details</h2>
+                    <button>&#9998;</button>
+                </div>
                 <button className={styles.fieldPop} onClick={() => QcSub(projectCont.project_id)}>&#8693;</button>
             </div>
             {
@@ -577,7 +618,10 @@ function LibSamDetails({projectCont, libqcDetails, setLibqcDetails}) {
     return(
         <div className={styles.ProjectComp}>
             <div className={styles.HeadComp}>
-                <h2 className={styles.sech}>Library QC Details</h2>
+                <div className={styles.sechDiv} >
+                    <h2 className={styles.sech}>Library QC Details</h2>
+                    <button>&#9998;</button>
+                </div>
                 <button className={styles.fieldPop} onClick={() => LibSub(projectCont.project_id)}>&#8693;</button>
             </div>
             {
@@ -631,7 +675,10 @@ function BiInfoDetails({projectCont, binfDetails, setBinfDetails}) {
     return(
         <div className={styles.ProjectComp}>
             <div className={styles.HeadComp}>
-                <h2 className={styles.sech}>Analysis Details</h2>
+                <div className={styles.sechDiv} >
+                    <h2 className={styles.sech}>Analysis Details</h2>
+                    <button>&#9998;</button>
+                </div>
                 <button className={styles.fieldPop} onClick={() => BinfSub(projectCont.project_id)} >&#8693;</button>
             </div>
             {
@@ -684,6 +731,13 @@ function Reports({projectCont, setProjectCont}) {
     }
 
     async function closeProject(projectId){
+
+        const confirmAction = window.confirm(
+            "You are going to close this project, Do you want to proceed"
+        )
+
+        if (!confirmAction) return
+
         try{
     
             const response = await axiosApi.post("/project/closeproject",

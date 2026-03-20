@@ -133,3 +133,7 @@ class ValidateSignup(BaseModel):
 class GenCatNo(BaseModel):
     category : str
     service_name : str
+
+class EditCheck(BaseModel):
+    project_id : str
+    meta : str
