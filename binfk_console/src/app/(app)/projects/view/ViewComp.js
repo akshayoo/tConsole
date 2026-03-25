@@ -51,6 +51,10 @@ export function ViewComp(){
 function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDetails, setBinfDetails}){
 
     const [projectPipeline, setProjectPipeline] = useState([])
+
+    const [selectedProject, setSelectedProject] = useState(null)
+
+    const[search, setSearch] = useState("")
     
     const [toast, setToast] = useState(null);
 
@@ -59,7 +63,7 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
             try{
                 const response = await axiosApi.get("/project/projects"
                 )
-                const data = await response.data
+                const data = response.data
 
                 console.log(data.message)
 
@@ -75,6 +79,7 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
 
 
     const ProjectPop = async(projectId, projectStatus) => {
+
 
         if(!projectId) return
         if(!projectStatus) return
@@ -104,7 +109,7 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
 
             console.log(data.message)
 
-
+            setSelectedProject(projectId)
             setProjectCont(data.payload)
             setSamsubDetails({})
             setQcDetails({})
@@ -126,6 +131,8 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
         }
     }
 
+    const projectSearched = projectPipeline.filter((proj) => proj.project_id.toLowerCase().includes(search.toLowerCase().trim()))
+
 
 
     return(
@@ -133,17 +140,17 @@ function ViewSideBar({setProjectCont, setSamsubDetails, setQcDetails, setLibqcDe
         <div className={styles.SideB}>
             <div className={styles.SearchDiv}>
                 <h2>Projects</h2>
-                <input type='search'/>
+                <input type='search' value={search} onChange={(e) => setSearch(e.target.value)}/>
             </div>
             <div className={styles.RecEnt}>
                 {
-                    projectPipeline.map((project) => {
+                    projectSearched.map((project) => {
                         const percent = project.percent
                         return(
 
-                            <button key={project.project_id} className={styles.projectBtns} onClick={() => ProjectPop(project.project_id, project.status)}>
+                            <button key={project.project_id} className={`${styles.projectBtns} ${selectedProject === project.project_id ? styles.activeProjClass : ""}`} onClick={() => ProjectPop(project.project_id, project.status)}>
                                 <div className={styles.BtnsHeader}>
-                                    <span id='projectId' className={styles.projectId}>{project.project_id}</span>
+                                    <span className={styles.projectId}>{project.project_id}</span>
                                     <span className={`${styles.statusBadge} ${styles.accepted}`}>{project.status}</span>
                                 </div>
                                 
@@ -196,6 +203,8 @@ function ViewWin ({projectCont, samsubDetails, setSamsubDetails,
 function ViewProjDetails({projectCont}) {
 
     const [projectComments, setProjectComments] = useState(false)
+
+    const [toast, setToast] = useState(null)
 
     async function editProjectDetails(meta, projId){
 
@@ -279,6 +288,7 @@ function ViewProjDetails({projectCont}) {
                         <div>{projectCont.offering_type}</div>
                     </div>
                 </div>
+                {toast && <MessageComp condition={toast.condition} message={toast.message} />}
             </div>
         </>
     );
@@ -401,13 +411,11 @@ function StatusPop({projectCont}){
                     </div> 
                     {projectCont.add_del.map((addDel) => {
                         return(
-                            <>
-                                <div key={addDel.task_number} className={styles.TaskComp}>
-                                    <div>{addDel.label}</div>
-                                    <button onClick={() => deleteTask("adel", projectCont.project_id, addDel.task_number)} className={styles.DelBtn} disabled={addDel.completed}>&#128465;</button>
-                                    <button onClick={() => updateTaskstage("adel", projectCont.project_id, addDel.task_number)} className={styles.TrueBtn} disabled={addDel.completed}>&#10004;</button>
-                                </div>                          
-                            </>
+                            <div key={addDel.task_number} className={styles.TaskComp}>
+                                <div>{addDel.label}</div>
+                                <button onClick={() => deleteTask("adel", projectCont.project_id, addDel.task_number)} className={styles.DelBtn} disabled={addDel.completed}>&#128465;</button>
+                                <button onClick={() => updateTaskstage("adel", projectCont.project_id, addDel.task_number)} className={styles.TrueBtn} disabled={addDel.completed}>&#10004;</button>
+                            </div>                          
                         );
                     })}         
                 </div> 
@@ -725,7 +733,7 @@ function Reports({projectCont, setProjectCont}) {
         catch(error){
 
             console.log(error)
-            setToast(setToast, false, "Downloading failed")
+            toastSet(setToast, false, "Downloading failed")
 
         }
     }

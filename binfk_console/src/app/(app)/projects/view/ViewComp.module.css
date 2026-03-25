@@ -36,10 +36,10 @@
 }
 
 .SearchDiv input{
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 5px;
     border: 1px solid rgb(177, 177, 177);
-    padding-inline-start: 5px;
+    padding-inline-start: 6px;
 }
 
 .SearchDiv input:hover{
@@ -94,8 +94,8 @@
 }
 
 .projectBtns:hover {
-    border-color: #3b82f6;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    border-color: #dd5800;
+    box-shadow: 0 0 0 3px rgba(221, 88, 0, 0.15);
     transform: translateY(-2px);
 }
 
@@ -104,8 +104,13 @@
 }
 
 .projectBtns:focus {
+    outline: none;
+}
+
+.activeProjClass{
     border-color: #dd5800;
     background-color: #fff9f4;
+    box-shadow: 0 0 0 3px rgba(221, 88, 0, 0.15);
 }
 
 .BtnsHeader {
