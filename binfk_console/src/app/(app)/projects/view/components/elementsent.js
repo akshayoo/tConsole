@@ -313,7 +313,7 @@ export function QcEdit({setQcDataForm, projectId}){
                             <label>Concentration assessed by</label>
                             <select name="concentration_technology" onChange={handleChange}>
                                 <option value="">Select</option>
-                                <option value="Quibit">Qubit</option>
+                                <option value="Qubit">Qubit</option>
                                 <option value="NanoDrop">NanoDrop</option>
                                 <option value="NanoDrop">NanoDrop & Qubit</option>
                             </select>
