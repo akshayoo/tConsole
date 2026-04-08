@@ -324,6 +324,7 @@ export function QcEdit({setQcDataForm, projectId}){
                                 <option value="">Select</option>
                                 <option value="TapeStation">TapeStation</option>
                                 <option value="BioAnalyzer">BioAnalyzer</option>
+                                <option value="BioAnalyzer">Agarose Gel</option>
                             </select>
                         </div>
                     </div>
