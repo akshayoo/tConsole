@@ -119,7 +119,7 @@ export function QcReportPushForm({setQcDataForm, projectId}){
                                 <option value="">Select</option>
                                 <option value="TapeStation">TapeStation</option>
                                 <option value="BioAnalyzer">BioAnalyzer</option>
-                                <option value="Agarose Gel Elactrophoresis">Agarose Gel Elactrophoresis</option>
+                                <option value="Agarose Gel Electrophoresis">Agarose Gel Electrophoresis</option>
                             </select>
                         </div>
                     </div>
